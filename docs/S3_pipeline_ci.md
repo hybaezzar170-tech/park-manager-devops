@@ -61,7 +61,7 @@ Chacun était un doublon d'un fichier correct (`Api/ReclamationController.php`, 
 |---|---|
 | `S3_01_workflow_ci_yml.png` | Le fichier `ci.yml` dans le dépôt |
 | `S3_02_premier_run_rouge.png` | Premier run : 1 échec, 1 succès |
-| `S3_03_detail_echec_psr4.png` | Journal de l'étape PSR-4 en échec |
+| `S3_03_detail_echec.png`s | Journal de l'étape PSR-4 en échec |
 | `S3_04_run_vert.png` | Run vert après correction |
 | `S3_05_pr_checks.png` | Pull request : « All checks have passed » |
 | `S3_06_duree_pipeline.png` | Durée des jobs |
