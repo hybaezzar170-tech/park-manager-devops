@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\Models\Taxe;
+use Illuminate\Http\Request;
 
 class TaxeController extends Controller
 {
@@ -47,7 +47,7 @@ class TaxeController extends Controller
 
         return response()->json([
             'message' => 'Taxe ajoutée avec succès',
-            'data' => $taxe
+            'data' => $taxe,
         ], 201);
     }
 
@@ -56,7 +56,7 @@ class TaxeController extends Controller
     {
         $taxe = Taxe::with('voiture')->find($id);
 
-        if (!$taxe) {
+        if (! $taxe) {
             return response()->json(['message' => 'Taxe introuvable'], 404);
         }
 
@@ -68,7 +68,7 @@ class TaxeController extends Controller
     {
         $taxe = Taxe::find($id);
 
-        if (!$taxe) {
+        if (! $taxe) {
             return response()->json(['message' => 'Taxe introuvable'], 404);
         }
 
@@ -88,7 +88,7 @@ class TaxeController extends Controller
 
         return response()->json([
             'message' => 'Taxe modifiée avec succès',
-            'data' => $taxe
+            'data' => $taxe,
         ], 200);
     }
 
@@ -97,7 +97,7 @@ class TaxeController extends Controller
     {
         $taxe = Taxe::find($id);
 
-        if (!$taxe) {
+        if (! $taxe) {
             return response()->json(['message' => 'Taxe introuvable'], 404);
         }
 

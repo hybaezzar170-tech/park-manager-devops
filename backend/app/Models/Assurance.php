@@ -16,14 +16,16 @@ class Assurance extends Model
         'date_debut',
         'date_expiration',
         'rappel_jours',
-        'note'
+        'note',
     ];
 
-    public function voiture() {
+    public function voiture()
+    {
         return $this->belongsTo(Voiture::class);
     }
 
-    public function fournisseur() {
+    public function fournisseur()
+    {
         return $this->belongsTo(Fournisseur::class);
     }
 }

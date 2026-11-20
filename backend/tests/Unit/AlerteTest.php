@@ -61,7 +61,7 @@ class AlerteTest extends TestCase
     /** Appelle le contrôleur et renvoie la liste des alertes sous forme de tableau. */
     private function lireAlertes(): array
     {
-        return (new AlerteController())->getExpirationAlerts()->getData(true);
+        return (new AlerteController)->getExpirationAlerts()->getData(true);
     }
 
     /** Cherche l'alerte dont le champ « voiture » contient le matricule donné. */
@@ -79,36 +79,36 @@ class AlerteTest extends TestCase
     private function creerVoiture(string $etat, string $matricule): int
     {
         $departementId = DB::table('departements')->insertGetId([
-            'nom'        => 'TEST Departement',
+            'nom' => 'TEST Departement',
             'created_at' => now(),
             'updated_at' => now(),
         ]);
 
         return (int) DB::table('voitures')->insertGetId([
-            'matricule'           => $matricule,
-            'modele'              => 'Peugeot 208',
-            'num_serie'           => 'SN-' . $matricule,
-            'departement_id'      => $departementId,
-            'marque'              => 'Peugeot',
-            'couleur'             => 'Noir',
+            'matricule' => $matricule,
+            'modele' => 'Peugeot 208',
+            'num_serie' => 'SN-'.$matricule,
+            'departement_id' => $departementId,
+            'marque' => 'Peugeot',
+            'couleur' => 'Noir',
             'mise_en_circulation' => '2026-01-01',
-            'carburant'           => 'Essence',
-            'etat'                => $etat,
-            'created_at'          => now(),
-            'updated_at'          => now(),
+            'carburant' => 'Essence',
+            'etat' => $etat,
+            'created_at' => now(),
+            'updated_at' => now(),
         ]);
     }
 
     private function creerAssurance(int $voitureId, string $dateExpiration): void
     {
         DB::table('assurances')->insert([
-            'voiture_id'      => $voitureId,
-            'type_assurance'  => 'Tiers',
-            'date_debut'      => '2026-01-01',
+            'voiture_id' => $voitureId,
+            'type_assurance' => 'Tiers',
+            'date_debut' => '2026-01-01',
             'date_expiration' => $dateExpiration,
-            'rappel_jours'    => 0,
-            'created_at'      => now(),
-            'updated_at'      => now(),
+            'rappel_jours' => 0,
+            'created_at' => now(),
+            'updated_at' => now(),
         ]);
     }
 }

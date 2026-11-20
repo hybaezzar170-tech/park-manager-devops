@@ -2,8 +2,8 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Seeder;
 use App\Models\Voiture;
+use Illuminate\Database\Seeder;
 
 class VoitureSeeder extends Seeder
 {
@@ -24,7 +24,7 @@ class VoitureSeeder extends Seeder
                 'etat' => 'disponible',
                 'prix_achat' => 85000.00,
                 'date_achat' => '2020-03-10',
-                'fournisseur_id' => 1 // Using existing fournisseur
+                'fournisseur_id' => 1, // Using existing fournisseur
             ],
             [
                 'matricule' => '98765-B-89',
@@ -40,7 +40,7 @@ class VoitureSeeder extends Seeder
                 'etat' => 'en_location',
                 'prix_achat' => 120000.00,
                 'date_achat' => '2021-06-15',
-                'fournisseur_id' => 2 // Using existing fournisseur
+                'fournisseur_id' => 2, // Using existing fournisseur
             ],
             [
                 'matricule' => '45678-C-12',
@@ -56,7 +56,7 @@ class VoitureSeeder extends Seeder
                 'etat' => 'disponible',
                 'prix_achat' => 95000.00,
                 'date_achat' => '2019-11-01',
-                'fournisseur_id' => 3 // Using existing fournisseur
+                'fournisseur_id' => 3, // Using existing fournisseur
             ],
             [
                 'matricule' => '78901-D-34',
@@ -72,7 +72,7 @@ class VoitureSeeder extends Seeder
                 'etat' => 'en_maintenance',
                 'prix_achat' => 145000.00,
                 'date_achat' => '2022-01-20',
-                'fournisseur_id' => 4 // Using existing fournisseur
+                'fournisseur_id' => 4, // Using existing fournisseur
             ],
             [
                 'matricule' => '23456-E-56',
@@ -88,8 +88,8 @@ class VoitureSeeder extends Seeder
                 'etat' => 'disponible',
                 'prix_achat' => 180000.00,
                 'date_achat' => '2023-04-05',
-                'fournisseur_id' => 5 // Using existing fournisseur
-            ]
+                'fournisseur_id' => 5, // Using existing fournisseur
+            ],
         ];
 
         foreach ($voitures as $voiture) {

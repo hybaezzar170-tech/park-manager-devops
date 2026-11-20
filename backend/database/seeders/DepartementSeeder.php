@@ -2,8 +2,8 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Seeder;
 use App\Models\Departement;
+use Illuminate\Database\Seeder;
 
 class DepartementSeeder extends Seeder
 {
@@ -12,24 +12,24 @@ class DepartementSeeder extends Seeder
         $departements = [
             [
                 'nom' => 'Transport Personnel',
-                'type' => 'voiture_5_places'
+                'type' => 'voiture_5_places',
             ],
             [
                 'nom' => 'Transport Collectif',
-                'type' => 'minibus'
+                'type' => 'minibus',
             ],
             [
                 'nom' => 'Livraison Marchandises',
-                'type' => 'utilitaire'
+                'type' => 'utilitaire',
             ],
             [
                 'nom' => 'Transport Lourd',
-                'type' => 'camion'
+                'type' => 'camion',
             ],
             [
                 'nom' => 'Service Client',
-                'type' => 'voiture_5_places'
-            ]
+                'type' => 'voiture_5_places',
+            ],
         ];
 
         foreach ($departements as $departement) {

@@ -15,14 +15,14 @@ class Piece extends Model
         'quantite',
         'prix_achat',
         'fournisseur_id',
-        'type_piece'
+        'type_piece',
     ];
 
     protected $casts = [
         'quantite' => 'integer',
         'prix_achat' => 'decimal:2',
         'created_at' => 'datetime',
-        'updated_at' => 'datetime'
+        'updated_at' => 'datetime',
     ];
 
     /**

@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
@@ -8,16 +9,18 @@ use Illuminate\Http\Request;
 
 class VenteController extends Controller
 {
-    public function index() {
+    public function index()
+    {
         return Vente::with('voiture')->get();
     }
 
-    public function store(Request $request) {
+    public function store(Request $request)
+    {
         $request->validate([
             'voiture_id' => 'required|exists:voitures,id',
             'client_id' => 'required|exists:clients,id',
             'prix_vente' => 'required|numeric',
-            'date_vente' => 'required|date'
+            'date_vente' => 'required|date',
         ]);
 
         $voiture = Voiture::findOrFail($request->voiture_id);

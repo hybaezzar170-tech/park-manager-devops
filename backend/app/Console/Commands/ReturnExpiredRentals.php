@@ -2,10 +2,9 @@
 
 namespace App\Console\Commands;
 
-use Illuminate\Console\Command;
 use App\Models\Location;
-use App\Models\Voiture;
 use Carbon\Carbon;
+use Illuminate\Console\Command;
 
 class ReturnExpiredRentals extends Command
 {
@@ -49,7 +48,7 @@ class ReturnExpiredRentals extends Command
         if ($expiredLocations->isEmpty()) {
             $this->info('No expired rentals found.');
         } else {
-            $this->info("Total rentals processed: " . $expiredLocations->count());
+            $this->info('Total rentals processed: '.$expiredLocations->count());
         }
     }
 }

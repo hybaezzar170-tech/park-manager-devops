@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\Models\Visite;
+use Illuminate\Http\Request;
 
 class VisiteController extends Controller
 {
@@ -20,10 +20,11 @@ class VisiteController extends Controller
             'date_visite' => 'required|date',
             'prochaine_visite' => 'nullable|date',
             'rappel_jours' => 'nullable|integer',
-            'note' => 'nullable|string'
+            'note' => 'nullable|string',
         ]);
 
         $visite = Visite::create($validated);
+
         return response()->json($visite, 201);
     }
 
@@ -36,6 +37,7 @@ class VisiteController extends Controller
     {
         $visite = Visite::findOrFail($id);
         $visite->update($request->all());
+
         return response()->json($visite);
     }
 
@@ -43,6 +45,7 @@ class VisiteController extends Controller
     {
         $visite = Visite::findOrFail($id);
         $visite->delete();
+
         return response()->json(['message' => 'Visite supprimée']);
     }
 }

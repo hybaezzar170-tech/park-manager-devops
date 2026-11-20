@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -13,7 +14,7 @@ class Vente extends Model
         'client_id',
         'acheteur',
         'prix_vente',
-        'date_vente'
+        'date_vente',
     ];
 
     public function voiture()

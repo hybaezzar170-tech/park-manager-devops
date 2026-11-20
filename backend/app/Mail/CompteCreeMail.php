@@ -15,7 +15,7 @@ class CompteCreeMail extends Mailable
     /**
      * Create a new message instance.
      *
-     * @param array $details
+     * @param  array  $details
      * @return void
      */
     public function __construct($details)
@@ -31,13 +31,13 @@ class CompteCreeMail extends Mailable
     public function build()
     {
         return $this->subject('Votre compte a été créé - AutoPark')
-                    ->view('emails.compte_cree')
-                    ->with([
-                        'nom' => $this->details['nom'],
-                        'prenom' => $this->details['prenom'],
-                        'email' => $this->details['email'],
-                        'password' => $this->details['password'],
-                        'type' => $this->details['type']
-                    ]);
+            ->view('emails.compte_cree')
+            ->with([
+                'nom' => $this->details['nom'],
+                'prenom' => $this->details['prenom'],
+                'email' => $this->details['email'],
+                'password' => $this->details['password'],
+                'type' => $this->details['type'],
+            ]);
     }
 }

@@ -2,8 +2,8 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Seeder;
 use App\Models\Conducteur;
+use Illuminate\Database\Seeder;
 
 class ConducteurSeeder extends Seeder
 {
@@ -20,7 +20,7 @@ class ConducteurSeeder extends Seeder
                 'email' => 'mohammed.alami1@email.com',
                 'date_naissance' => '1985-05-15',
                 'date_embauche' => '2020-01-15',
-                'numero_permis' => 'B1234567'
+                'numero_permis' => 'B1234567',
             ],
             [
                 'nom' => 'Zahra',
@@ -32,7 +32,7 @@ class ConducteurSeeder extends Seeder
                 'email' => 'fatima.zahra2@email.com',
                 'date_naissance' => '1990-08-22',
                 'date_embauche' => '2018-03-10',
-                'numero_permis' => 'B7890123'
+                'numero_permis' => 'B7890123',
             ],
             [
                 'nom' => 'Karim',
@@ -44,7 +44,7 @@ class ConducteurSeeder extends Seeder
                 'email' => 'abdelkrim.karim3@email.com',
                 'date_naissance' => '1988-12-03',
                 'date_embauche' => '2019-06-20',
-                'numero_permis' => 'B3456789'
+                'numero_permis' => 'B3456789',
             ],
             [
                 'nom' => 'Benjelloun',
@@ -56,7 +56,7 @@ class ConducteurSeeder extends Seeder
                 'email' => 'amina.benjelloun4@email.com',
                 'date_naissance' => '1992-04-18',
                 'date_embauche' => '2021-09-15',
-                'numero_permis' => 'B9012345'
+                'numero_permis' => 'B9012345',
             ],
             [
                 'nom' => 'Amrani',
@@ -68,8 +68,8 @@ class ConducteurSeeder extends Seeder
                 'email' => 'youssef.amrani5@email.com',
                 'date_naissance' => '1987-09-30',
                 'date_embauche' => '2017-12-01',
-                'numero_permis' => 'B5678901'
-            ]
+                'numero_permis' => 'B5678901',
+            ],
         ];
 
         foreach ($conducteurs as $conducteur) {

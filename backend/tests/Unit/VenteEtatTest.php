@@ -50,29 +50,29 @@ class VenteEtatTest extends TestCase
     private function preparer(string $etat): array
     {
         $departementId = DB::table('departements')->insertGetId([
-            'nom'        => 'TEST Departement',
+            'nom' => 'TEST Departement',
             'created_at' => now(),
             'updated_at' => now(),
         ]);
 
         $voitureId = DB::table('voitures')->insertGetId([
-            'matricule'           => 'TEST-UT-' . strtoupper($etat),
-            'modele'              => 'Peugeot 208',
-            'num_serie'           => 'TESTUT' . strtoupper($etat),
-            'departement_id'      => $departementId,
-            'marque'              => 'Peugeot',
-            'couleur'             => 'Noir',
+            'matricule' => 'TEST-UT-'.strtoupper($etat),
+            'modele' => 'Peugeot 208',
+            'num_serie' => 'TESTUT'.strtoupper($etat),
+            'departement_id' => $departementId,
+            'marque' => 'Peugeot',
+            'couleur' => 'Noir',
             'mise_en_circulation' => '2026-01-01',
-            'carburant'           => 'Essence',
-            'etat'                => $etat,
-            'created_at'          => now(),
-            'updated_at'          => now(),
+            'carburant' => 'Essence',
+            'etat' => $etat,
+            'created_at' => now(),
+            'updated_at' => now(),
         ]);
 
         $clientId = DB::table('clients')->insertGetId([
-            'nom'        => 'TEST',
-            'prenom'     => 'Client',
-            'telephone'  => '20123456',
+            'nom' => 'TEST',
+            'prenom' => 'Client',
+            'telephone' => '20123456',
             'created_at' => now(),
             'updated_at' => now(),
         ]);
@@ -85,13 +85,13 @@ class VenteEtatTest extends TestCase
     {
         $request = Request::create('/api/ventes', 'POST', [
             'voiture_id' => $voitureId,
-            'client_id'  => $clientId,
+            'client_id' => $clientId,
             'prix_vente' => 25000,
             'date_vente' => '2026-11-06',
         ]);
 
         try {
-            return (new VenteController())->store($request)->getStatusCode();
+            return (new VenteController)->store($request)->getStatusCode();
         } catch (ValidationException $e) {
             return 422;
         }

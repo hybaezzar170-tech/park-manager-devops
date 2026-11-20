@@ -14,7 +14,7 @@ class Kernel extends ConsoleKernel
     {
         // Check expired services every hour
         $schedule->command('app:check-expired-services')->hourly();
-        
+
         // $schedule->command('inspire')->hourly();
     }
 

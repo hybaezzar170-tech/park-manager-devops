@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use App\Models\acc_;  // 🔹 modèle à utiliser
+use App\Models\acc_;
+use Illuminate\Http\Request;  // 🔹 modèle à utiliser
 
 class acc_Controller extends Controller
 {
@@ -17,21 +17,22 @@ class acc_Controller extends Controller
     {
         $validated = $request->validate([
             'fournisseur_id' => 'required|exists:fournisseurs,id',
-            'voiture_id'     => 'required|exists:voitures,id',
-            'reference'      => 'required|unique:acc_,reference',
-            'nom'            => 'required|string',
-            'categorie'      => 'required|string',
-            'marque'         => 'nullable|string',
-            'quantite'       => 'required|integer',
-            'seuil_alerte'   => 'nullable|integer',
-            'etat'           => 'nullable|string',
-            'prix_achat'     => 'nullable|numeric',
-            'prix_vente'     => 'nullable|numeric',
-            'date_achat'     => 'nullable|date',
-            'description'    => 'nullable|string',
+            'voiture_id' => 'required|exists:voitures,id',
+            'reference' => 'required|unique:acc_,reference',
+            'nom' => 'required|string',
+            'categorie' => 'required|string',
+            'marque' => 'nullable|string',
+            'quantite' => 'required|integer',
+            'seuil_alerte' => 'nullable|integer',
+            'etat' => 'nullable|string',
+            'prix_achat' => 'nullable|numeric',
+            'prix_vente' => 'nullable|numeric',
+            'date_achat' => 'nullable|date',
+            'description' => 'nullable|string',
         ]);
 
         $acc = acc_::create($validated);
+
         return response()->json($acc, 201);
     }
 
@@ -46,18 +47,18 @@ class acc_Controller extends Controller
 
         $validated = $request->validate([
             'fournisseur_id' => 'required|exists:fournisseurs,id',
-            'voiture_id'     => 'required|exists:voitures,id',
-            'reference'      => 'required|unique:acc_,reference,' . $id,
-            'nom'            => 'required|string',
-            'categorie'      => 'required|string',
-            'marque'         => 'nullable|string',
-            'quantite'       => 'required|integer',
-            'seuil_alerte'   => 'nullable|integer',
-            'etat'           => 'nullable|string',
-            'prix_achat'     => 'nullable|numeric',
-            'prix_vente'     => 'nullable|numeric',
-            'date_achat'     => 'nullable|date',
-            'description'    => 'nullable|string',
+            'voiture_id' => 'required|exists:voitures,id',
+            'reference' => 'required|unique:acc_,reference,'.$id,
+            'nom' => 'required|string',
+            'categorie' => 'required|string',
+            'marque' => 'nullable|string',
+            'quantite' => 'required|integer',
+            'seuil_alerte' => 'nullable|integer',
+            'etat' => 'nullable|string',
+            'prix_achat' => 'nullable|numeric',
+            'prix_vente' => 'nullable|numeric',
+            'date_achat' => 'nullable|date',
+            'description' => 'nullable|string',
         ]);
 
         $acc->update($validated);

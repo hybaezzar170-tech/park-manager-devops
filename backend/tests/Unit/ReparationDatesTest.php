@@ -15,12 +15,12 @@ class ReparationDatesTest extends TestCase
 {
     public function test_reparation_avec_date_fin_avant_date_debut_est_refusee(): void
     {
-        $controller = new ReparationController();
+        $controller = new ReparationController;
         $request = Request::create('/api/reparations', 'POST', [
             'description' => 'TEST Vidange',
-            'date_debut'  => '2026-12-10',
-            'date_fin'    => '2026-12-09',
-            'statut'      => 'en_cours',
+            'date_debut' => '2026-12-10',
+            'date_fin' => '2026-12-09',
+            'statut' => 'en_cours',
         ]);
 
         try {

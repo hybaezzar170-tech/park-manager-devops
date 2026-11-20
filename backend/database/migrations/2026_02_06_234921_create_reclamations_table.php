@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('statut')->default('en_attente');
             $table->text('reponse')->nullable();
             $table->timestamps();
-            
+
             $table->foreign('voiture_id')->references('id')->on('voitures')->onDelete('set null');
         });
     }

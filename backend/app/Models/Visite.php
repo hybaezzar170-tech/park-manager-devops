@@ -14,10 +14,11 @@ class Visite extends Model
         'date_visite',
         'prochaine_visite',
         'rappel_jours',
-        'note'
+        'note',
     ];
 
-    public function voiture() {
+    public function voiture()
+    {
         return $this->belongsTo(Voiture::class);
     }
 }

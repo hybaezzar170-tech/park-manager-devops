@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Models\ExpirationAlert;
 use App\Models\Assurance;
 use App\Models\TaxeCirculation;
 use App\Models\Visite;
@@ -26,7 +25,7 @@ class ExpirationAlertController extends Controller
                 if ($assurance->date_expiration) {
                     $expirationDate = Carbon::parse($assurance->date_expiration);
                     $daysUntil = $today->diffInDays($expirationDate, false);
-                    
+
                     // Show expired items as urgent
                     if ($daysUntil < 0) {
                         $alerts[] = [
@@ -36,8 +35,8 @@ class ExpirationAlertController extends Controller
                             'expiration_date' => $assurance->date_expiration,
                             'days_remaining' => $daysUntil,
                             'urgency' => 'Urgent',
-                            'message' => "Assurance a expiré le " . $expirationDate->format('d/m/Y'),
-                            'reference_id' => 'assurance_' . $assurance->id,
+                            'message' => 'Assurance a expiré le '.$expirationDate->format('d/m/Y'),
+                            'reference_id' => 'assurance_'.$assurance->id,
                         ];
                     } elseif ($daysUntil <= $urgentDays) {
                         $alerts[] = [
@@ -47,8 +46,8 @@ class ExpirationAlertController extends Controller
                             'expiration_date' => $assurance->date_expiration,
                             'days_remaining' => $daysUntil,
                             'urgency' => 'Urgent',
-                            'message' => "Assurance expire le " . $expirationDate->format('d/m/Y'),
-                            'reference_id' => 'assurance_' . $assurance->id,
+                            'message' => 'Assurance expire le '.$expirationDate->format('d/m/Y'),
+                            'reference_id' => 'assurance_'.$assurance->id,
                         ];
                     } elseif ($daysUntil <= $warningDays) {
                         $alerts[] = [
@@ -58,14 +57,14 @@ class ExpirationAlertController extends Controller
                             'expiration_date' => $assurance->date_expiration,
                             'days_remaining' => $daysUntil,
                             'urgency' => 'Warning',
-                            'message' => "Assurance expire le " . $expirationDate->format('d/m/Y'),
-                            'reference_id' => 'assurance_' . $assurance->id,
+                            'message' => 'Assurance expire le '.$expirationDate->format('d/m/Y'),
+                            'reference_id' => 'assurance_'.$assurance->id,
                         ];
                     }
                 }
             }
         } catch (\Exception $e) {
-            \Log::error('Error processing assurances: ' . $e->getMessage());
+            \Log::error('Error processing assurances: '.$e->getMessage());
         }
 
         // Check Taxes Circulation
@@ -76,11 +75,11 @@ class ExpirationAlertController extends Controller
                 if ($taxe->status === 'payé') {
                     continue;
                 }
-                
+
                 if ($taxe->date_expiration) {
                     $expirationDate = Carbon::parse($taxe->date_expiration);
                     $daysUntil = $today->diffInDays($expirationDate, false);
-                    
+
                     // Show expired items as urgent
                     if ($daysUntil < 0) {
                         $alerts[] = [
@@ -90,8 +89,8 @@ class ExpirationAlertController extends Controller
                             'expiration_date' => $taxe->date_expiration,
                             'days_remaining' => $daysUntil,
                             'urgency' => 'Urgent',
-                            'message' => "Taxe circulation a expiré le " . $expirationDate->format('d/m/Y'),
-                            'reference_id' => 'taxe_' . $taxe->id,
+                            'message' => 'Taxe circulation a expiré le '.$expirationDate->format('d/m/Y'),
+                            'reference_id' => 'taxe_'.$taxe->id,
                         ];
                     } elseif ($daysUntil <= $urgentDays) {
                         $alerts[] = [
@@ -101,8 +100,8 @@ class ExpirationAlertController extends Controller
                             'expiration_date' => $taxe->date_expiration,
                             'days_remaining' => $daysUntil,
                             'urgency' => 'Urgent',
-                            'message' => "Taxe circulation expire le " . $expirationDate->format('d/m/Y'),
-                            'reference_id' => 'taxe_' . $taxe->id,
+                            'message' => 'Taxe circulation expire le '.$expirationDate->format('d/m/Y'),
+                            'reference_id' => 'taxe_'.$taxe->id,
                         ];
                     } elseif ($daysUntil <= $warningDays) {
                         $alerts[] = [
@@ -112,14 +111,14 @@ class ExpirationAlertController extends Controller
                             'expiration_date' => $taxe->date_expiration,
                             'days_remaining' => $daysUntil,
                             'urgency' => 'Warning',
-                            'message' => "Taxe circulation expire le " . $expirationDate->format('d/m/Y'),
-                            'reference_id' => 'taxe_' . $taxe->id,
+                            'message' => 'Taxe circulation expire le '.$expirationDate->format('d/m/Y'),
+                            'reference_id' => 'taxe_'.$taxe->id,
                         ];
                     }
                 }
             }
         } catch (\Exception $e) {
-            \Log::error('Error processing taxes: ' . $e->getMessage());
+            \Log::error('Error processing taxes: '.$e->getMessage());
         }
 
         // Check Visites Techniques
@@ -129,7 +128,7 @@ class ExpirationAlertController extends Controller
                 if ($visite->prochaine_visite) {
                     $expirationDate = Carbon::parse($visite->prochaine_visite);
                     $daysUntil = $today->diffInDays($expirationDate, false);
-                    
+
                     // Show expired items as urgent
                     if ($daysUntil < 0) {
                         $alerts[] = [
@@ -139,8 +138,8 @@ class ExpirationAlertController extends Controller
                             'expiration_date' => $visite->prochaine_visite,
                             'days_remaining' => $daysUntil,
                             'urgency' => 'Urgent',
-                            'message' => "Visite technique était prévue le " . $expirationDate->format('d/m/Y'),
-                            'reference_id' => 'visite_' . $visite->id,
+                            'message' => 'Visite technique était prévue le '.$expirationDate->format('d/m/Y'),
+                            'reference_id' => 'visite_'.$visite->id,
                         ];
                     } elseif ($daysUntil <= $urgentDays) {
                         $alerts[] = [
@@ -150,8 +149,8 @@ class ExpirationAlertController extends Controller
                             'expiration_date' => $visite->prochaine_visite,
                             'days_remaining' => $daysUntil,
                             'urgency' => 'Urgent',
-                            'message' => "Visite technique le " . $expirationDate->format('d/m/Y'),
-                            'reference_id' => 'visite_' . $visite->id,
+                            'message' => 'Visite technique le '.$expirationDate->format('d/m/Y'),
+                            'reference_id' => 'visite_'.$visite->id,
                         ];
                     } elseif ($daysUntil <= $warningDays) {
                         $alerts[] = [
@@ -161,20 +160,25 @@ class ExpirationAlertController extends Controller
                             'expiration_date' => $visite->prochaine_visite,
                             'days_remaining' => $daysUntil,
                             'urgency' => 'Warning',
-                            'message' => "Visite technique le " . $expirationDate->format('d/m/Y'),
-                            'reference_id' => 'visite_' . $visite->id,
+                            'message' => 'Visite technique le '.$expirationDate->format('d/m/Y'),
+                            'reference_id' => 'visite_'.$visite->id,
                         ];
                     }
                 }
             }
         } catch (\Exception $e) {
-            \Log::error('Error processing visites: ' . $e->getMessage());
+            \Log::error('Error processing visites: '.$e->getMessage());
         }
 
         // Sort alerts by urgency and days remaining
-        usort($alerts, function($a, $b) {
-            if ($a['urgency'] === 'Urgent' && $b['urgency'] !== 'Urgent') return -1;
-            if ($a['urgency'] !== 'Urgent' && $b['urgency'] === 'Urgent') return 1;
+        usort($alerts, function ($a, $b) {
+            if ($a['urgency'] === 'Urgent' && $b['urgency'] !== 'Urgent') {
+                return -1;
+            }
+            if ($a['urgency'] !== 'Urgent' && $b['urgency'] === 'Urgent') {
+                return 1;
+            }
+
             return $a['days_remaining'] - $b['days_remaining'];
         });
 

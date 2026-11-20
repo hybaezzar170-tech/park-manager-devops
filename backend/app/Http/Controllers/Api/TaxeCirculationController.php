@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\Models\TaxeCirculation;
+use Illuminate\Http\Request;
 
 class TaxeCirculationController extends Controller
 {
@@ -23,10 +23,11 @@ class TaxeCirculationController extends Controller
             'status' => 'required|in:payé,non payé',
             'date_expiration' => 'nullable|date',
             'rappel_jours' => 'nullable|integer',
-            'note' => 'nullable|string'
+            'note' => 'nullable|string',
         ]);
 
         $taxe = TaxeCirculation::create($validated);
+
         return response()->json($taxe, 201);
     }
 
@@ -39,6 +40,7 @@ class TaxeCirculationController extends Controller
     {
         $taxe = TaxeCirculation::findOrFail($id);
         $taxe->update($request->all());
+
         return response()->json($taxe);
     }
 
@@ -46,6 +48,7 @@ class TaxeCirculationController extends Controller
     {
         $taxe = TaxeCirculation::findOrFail($id);
         $taxe->delete();
+
         return response()->json(['message' => 'Taxe Circulation supprimée']);
     }
 }

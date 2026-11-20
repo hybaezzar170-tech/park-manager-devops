@@ -13,6 +13,7 @@ class DepartementController extends Controller
         if ($request->query('all') === 'true') {
             return response()->json(Departement::all(), 200);
         }
+
         return response()->json(Departement::where('etat', 'actif')->get(), 200);
     }
 
@@ -23,11 +24,11 @@ class DepartementController extends Controller
 
     public function store(Request $request)
     {
-    
+
         $request->validate([
-            'nom'=>'required|string|max:255',
-            'type'=>'nullable|string|max:255',
-            'etat'=>'nullable|string|in:actif,inactif'
+            'nom' => 'required|string|max:255',
+            'type' => 'nullable|string|max:255',
+            'etat' => 'nullable|string|in:actif,inactif',
         ]);
 
         $departement = Departement::create($request->only('nom', 'type', 'etat'));
@@ -39,7 +40,7 @@ class DepartementController extends Controller
     {
         $departement = Departement::find($id);
 
-        if (!$departement) {
+        if (! $departement) {
             return response()->json(['message' => 'Département introuvable'], 404);
         }
 
@@ -50,7 +51,7 @@ class DepartementController extends Controller
     {
         $departement = Departement::find($id);
 
-        if (!$departement) {
+        if (! $departement) {
             return response()->json(['message' => 'Département introuvable'], 404);
         }
 
@@ -64,7 +65,7 @@ class DepartementController extends Controller
 
         return response()->json([
             'message' => 'Département modifié avec succès',
-            'data' => $departement
+            'data' => $departement,
         ], 200);
     }
 
@@ -72,7 +73,7 @@ class DepartementController extends Controller
     {
         $departement = Departement::find($id);
 
-        if (!$departement) {
+        if (! $departement) {
             return response()->json(['message' => 'Département introuvable'], 404);
         }
 
@@ -85,7 +86,7 @@ class DepartementController extends Controller
     {
         $departement = Departement::find($id);
 
-        if (!$departement) {
+        if (! $departement) {
             return response()->json(['message' => 'Département introuvable'], 404);
         }
 
@@ -94,7 +95,7 @@ class DepartementController extends Controller
 
         return response()->json([
             'message' => $departement->etat === 'actif' ? 'Département activé avec succès' : 'Département désactivé avec succès',
-            'data' => $departement
+            'data' => $departement,
         ], 200);
     }
 }

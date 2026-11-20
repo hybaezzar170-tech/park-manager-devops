@@ -19,14 +19,14 @@ class Ouvrier extends Model
         'salaire',
         'date_embauche',
         'statut',
-        'adresse'
+        'adresse',
     ];
 
     protected $casts = [
         'salaire' => 'decimal:2',
         'date_embauche' => 'date',
         'created_at' => 'datetime',
-        'updated_at' => 'datetime'
+        'updated_at' => 'datetime',
     ];
 
     /**
@@ -50,7 +50,7 @@ class Ouvrier extends Model
      */
     public function getNomCompletAttribute()
     {
-        return $this->nom . ' ' . $this->prenom;
+        return $this->nom.' '.$this->prenom;
     }
 
     /**

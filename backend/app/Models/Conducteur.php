@@ -4,7 +4,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Voiture;
 
 class Conducteur extends Model
 {
@@ -22,7 +21,7 @@ class Conducteur extends Model
         'telephone',
         'email',
         'password',
-        'etat'
+        'etat',
     ];
 
     public function voitures()

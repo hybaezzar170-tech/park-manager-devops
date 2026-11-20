@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\Models\Voiture;
+use Illuminate\Http\Request;
 
 class VoitureController extends Controller
 {
@@ -70,12 +70,13 @@ class VoitureController extends Controller
 
             return response()->json([
                 'message' => 'Voiture ajoutée avec succès',
-                'data' => $voiture
+                'data' => $voiture,
             ], 201);
         } catch (\Exception $e) {
-            \Log::error('Voiture creation error: ' . $e->getMessage());
+            \Log::error('Voiture creation error: '.$e->getMessage());
+
             return response()->json([
-                'message' => 'Erreur lors de l\'ajout: ' . $e->getMessage()
+                'message' => 'Erreur lors de l\'ajout: '.$e->getMessage(),
             ], 500);
         }
     }
@@ -85,7 +86,7 @@ class VoitureController extends Controller
     {
         $voiture = Voiture::with(['departement', 'conducteur', 'fournisseur'])->find($id);
 
-        if (!$voiture) {
+        if (! $voiture) {
             return response()->json(['message' => 'Voiture introuvable'], 404);
         }
 
@@ -97,12 +98,12 @@ class VoitureController extends Controller
     {
         try {
             $voiture = Voiture::with([
-                'departement', 
-                'conducteur', 
-                'fournisseur'
+                'departement',
+                'conducteur',
+                'fournisseur',
             ])->find($id);
 
-            if (!$voiture) {
+            if (! $voiture) {
                 return response()->json(['message' => 'Voiture introuvable'], 404);
             }
 
@@ -117,10 +118,11 @@ class VoitureController extends Controller
 
             return response()->json($voiture, 200);
         } catch (\Exception $e) {
-            \Log::error('Voiture details error: ' . $e->getMessage());
+            \Log::error('Voiture details error: '.$e->getMessage());
+
             return response()->json([
-                'message' => 'Erreur lors de la récupération des détails: ' . $e->getMessage(),
-                'error' => $e->getMessage()
+                'message' => 'Erreur lors de la récupération des détails: '.$e->getMessage(),
+                'error' => $e->getMessage(),
             ], 500);
         }
     }
@@ -130,14 +132,14 @@ class VoitureController extends Controller
     {
         $voiture = Voiture::find($id);
 
-        if (!$voiture) {
+        if (! $voiture) {
             return response()->json(['message' => 'Voiture introuvable'], 404);
         }
 
         $validated = $request->validate([
-            'matricule' => 'sometimes|required|string|unique:voitures,matricule,' . $id,
+            'matricule' => 'sometimes|required|string|unique:voitures,matricule,'.$id,
             'modele' => 'sometimes|required|string',
-            'num_serie' => 'sometimes|required|string|unique:voitures,num_serie,' . $id,
+            'num_serie' => 'sometimes|required|string|unique:voitures,num_serie,'.$id,
             'departement_id' => 'sometimes|required|exists:departements,id',
             'conducteur_id' => 'nullable|exists:conducteurs,id',
             'marque' => 'sometimes|required|string',
@@ -154,7 +156,7 @@ class VoitureController extends Controller
 
         return response()->json([
             'message' => 'Voiture modifiée avec succès',
-            'data' => $voiture
+            'data' => $voiture,
         ], 200);
     }
 
@@ -163,13 +165,13 @@ class VoitureController extends Controller
     {
         $voiture = Voiture::find($id);
 
-        if (!$voiture) {
+        if (! $voiture) {
             return response()->json(['message' => 'Voiture introuvable'], 404);
         }
 
         if ($voiture->etat === 'en_location') {
             return response()->json([
-                'message' => 'Impossible de supprimer une voiture en location'
+                'message' => 'Impossible de supprimer une voiture en location',
             ], 400);
         }
 

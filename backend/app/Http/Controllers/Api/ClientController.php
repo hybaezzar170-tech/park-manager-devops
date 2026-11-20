@@ -12,10 +12,10 @@ class ClientController extends Controller
     public function index()
     {
         $clients = Client::orderBy('created_at', 'desc')->get();
-        
+
         return response()->json([
             'message' => 'Liste des clients récupérée avec succès',
-            'data' => $clients
+            'data' => $clients,
         ], 200);
     }
 
@@ -29,27 +29,27 @@ class ClientController extends Controller
                 'prenom' => 'required|string|max:255',
                 'telephone' => 'required|string|max:20',
                 'email' => 'nullable|email|max:255',
-                'adresse' => 'nullable|string|max:500'
+                'adresse' => 'nullable|string|max:500',
             ]);
 
             $client = Client::create($validated);
 
             return response()->json([
                 'message' => 'Client ajouté avec succès',
-                'data' => $client
+                'data' => $client,
             ], 201);
 
         } catch (\Illuminate\Validation\ValidationException $e) {
             return response()->json([
                 'message' => 'Erreur de validation',
-                'errors' => $e->errors()
+                'errors' => $e->errors(),
             ], 422);
         } catch (\Exception $e) {
-            \Log::error('Client creation error: ' . $e->getMessage());
-            
+            \Log::error('Client creation error: '.$e->getMessage());
+
             return response()->json([
                 'message' => 'Erreur lors de l\'ajout du client',
-                'error' => $e->getMessage()
+                'error' => $e->getMessage(),
             ], 500);
         }
     }
@@ -59,15 +59,15 @@ class ClientController extends Controller
     {
         $client = Client::find($id);
 
-        if (!$client) {
+        if (! $client) {
             return response()->json([
-                'message' => 'Client introuvable'
+                'message' => 'Client introuvable',
             ], 404);
         }
 
         return response()->json([
             'message' => 'Client récupéré avec succès',
-            'data' => $client
+            'data' => $client,
         ], 200);
     }
 
@@ -76,9 +76,9 @@ class ClientController extends Controller
     {
         $client = Client::find($id);
 
-        if (!$client) {
+        if (! $client) {
             return response()->json([
-                'message' => 'Client introuvable'
+                'message' => 'Client introuvable',
             ], 404);
         }
 
@@ -87,23 +87,23 @@ class ClientController extends Controller
                 'nom' => 'sometimes|required|string|max:255',
                 'prenom' => 'sometimes|required|string|max:255',
                 'telephone' => 'sometimes|required|string|max:20',
-                'email' => 'sometimes|nullable|email|max:255|unique:clients,email,' . $id,
-                'adresse' => 'sometimes|nullable|string|max:500'
+                'email' => 'sometimes|nullable|email|max:255|unique:clients,email,'.$id,
+                'adresse' => 'sometimes|nullable|string|max:500',
             ]);
 
             $client->update($validated);
 
             return response()->json([
                 'message' => 'Client modifié avec succès',
-                'data' => $client
+                'data' => $client,
             ], 200);
 
         } catch (\Exception $e) {
-            \Log::error('Client update error: ' . $e->getMessage());
-            
+            \Log::error('Client update error: '.$e->getMessage());
+
             return response()->json([
                 'message' => 'Erreur lors de la modification du client',
-                'error' => $e->getMessage()
+                'error' => $e->getMessage(),
             ], 500);
         }
     }
@@ -113,19 +113,19 @@ class ClientController extends Controller
     {
         $client = Client::find($id);
 
-        if (!$client) {
+        if (! $client) {
             return response()->json([
-                'message' => 'Client introuvable'
+                'message' => 'Client introuvable',
             ], 404);
         }
 
         // Vérifier si le client a des locations en cours
         $locationsEnCours = $client->locations()->where('etat', 'en_cours')->count();
-        
+
         if ($locationsEnCours > 0) {
             return response()->json([
                 'message' => 'Impossible de supprimer un client avec des locations en cours',
-                'error' => 'Ce client a ' . $locationsEnCours . ' location(s) en cours'
+                'error' => 'Ce client a '.$locationsEnCours.' location(s) en cours',
             ], 400);
         }
 
@@ -133,15 +133,15 @@ class ClientController extends Controller
             $client->delete();
 
             return response()->json([
-                'message' => 'Client supprimé avec succès'
+                'message' => 'Client supprimé avec succès',
             ], 200);
 
         } catch (\Exception $e) {
-            \Log::error('Client deletion error: ' . $e->getMessage());
-            
+            \Log::error('Client deletion error: '.$e->getMessage());
+
             return response()->json([
                 'message' => 'Erreur lors de la suppression du client',
-                'error' => $e->getMessage()
+                'error' => $e->getMessage(),
             ], 500);
         }
     }
@@ -150,24 +150,24 @@ class ClientController extends Controller
     public function search(Request $request)
     {
         $query = $request->get('q');
-        
-        if (!$query) {
+
+        if (! $query) {
             return response()->json([
                 'message' => 'Veuillez fournir un terme de recherche',
-                'data' => []
+                'data' => [],
             ], 400);
         }
 
-        $clients = Client::where(function($queryBuilder) use ($query) {
+        $clients = Client::where(function ($queryBuilder) use ($query) {
             $queryBuilder->where('nom', 'like', "%{$query}%")
-                      ->orWhere('prenom', 'like', "%{$query}%")
-                      ->orWhere('email', 'like', "%{$query}%")
-                      ->orWhere('telephone', 'like', "%{$query}%");
+                ->orWhere('prenom', 'like', "%{$query}%")
+                ->orWhere('email', 'like', "%{$query}%")
+                ->orWhere('telephone', 'like', "%{$query}%");
         })->orderBy('created_at', 'desc')->get();
 
         return response()->json([
-            'message' => 'Résultats de recherche pour "' . $query . '"',
-            'data' => $clients
+            'message' => 'Résultats de recherche pour "'.$query.'"',
+            'data' => $clients,
         ], 200);
     }
 }

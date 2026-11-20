@@ -17,12 +17,12 @@ class Reclamation extends Model
         'voiture_id',
         'email',
         'statut',
-        'reponse'
+        'reponse',
     ];
 
     protected $casts = [
         'created_at' => 'datetime',
-        'updated_at' => 'datetime'
+        'updated_at' => 'datetime',
     ];
 
     // Relations

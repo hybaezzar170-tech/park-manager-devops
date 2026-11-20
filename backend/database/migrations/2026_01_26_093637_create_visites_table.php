@@ -12,14 +12,14 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('visites', function (Blueprint $table) {
-    $table->id();
-    $table->foreignId('voiture_id')->constrained()->onDelete('cascade');
-    $table->date('date_visite');
-    $table->date('prochaine_visite')->nullable();
-    $table->integer('rappel_jours')->default(0);
-    $table->text('note')->nullable();
-    $table->timestamps();
-});
+            $table->id();
+            $table->foreignId('voiture_id')->constrained()->onDelete('cascade');
+            $table->date('date_visite');
+            $table->date('prochaine_visite')->nullable();
+            $table->integer('rappel_jours')->default(0);
+            $table->text('note')->nullable();
+            $table->timestamps();
+        });
 
     }
 

@@ -3,11 +3,11 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Mail\CompteCreeMail;
 use App\Models\Ouvrier;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Mail;
-use App\Mail\CompteCreeMail;
+use Illuminate\Support\Facades\Validator;
 
 class OuvrierController extends Controller
 {
@@ -17,11 +17,11 @@ class OuvrierController extends Controller
     public function index()
     {
         $ouvriers = Ouvrier::orderBy('created_at', 'desc')->get();
-        
+
         return response()->json([
             'success' => true,
             'data' => $ouvriers,
-            'message' => 'Ouvriers récupérés avec succès'
+            'message' => 'Ouvriers récupérés avec succès',
         ]);
     }
 
@@ -31,11 +31,11 @@ class OuvrierController extends Controller
     public function actifs()
     {
         $ouvriers = Ouvrier::actifs()->orderBy('created_at', 'desc')->get();
-        
+
         return response()->json([
             'success' => true,
             'data' => $ouvriers,
-            'message' => 'Ouvriers actifs récupérés avec succès'
+            'message' => 'Ouvriers actifs récupérés avec succès',
         ]);
     }
 
@@ -44,19 +44,19 @@ class OuvrierController extends Controller
      */
     public function byType($type)
     {
-        if (!in_array($type, ['technicien', 'mecanicien'])) {
+        if (! in_array($type, ['technicien', 'mecanicien'])) {
             return response()->json([
                 'success' => false,
-                'message' => 'Type invalide. Types autorisés: technicien, mecanicien'
+                'message' => 'Type invalide. Types autorisés: technicien, mecanicien',
             ], 400);
         }
 
         $ouvriers = Ouvrier::byType($type)->orderBy('created_at', 'desc')->get();
-        
+
         return response()->json([
             'success' => true,
             'data' => $ouvriers,
-            'message' => "Ouvriers de type {$type} récupérés avec succès"
+            'message' => "Ouvriers de type {$type} récupérés avec succès",
         ]);
     }
 
@@ -74,14 +74,14 @@ class OuvrierController extends Controller
             'salaire' => 'nullable|numeric|min:0',
             'date_embauche' => 'nullable|date',
             'statut' => 'nullable|in:actif,inactif',
-            'adresse' => 'nullable|string|max:500'
+            'adresse' => 'nullable|string|max:500',
         ]);
 
         if ($validator->fails()) {
             return response()->json([
                 'success' => false,
                 'message' => 'Erreur de validation',
-                'errors' => $validator->errors()
+                'errors' => $validator->errors(),
             ], 422);
         }
 
@@ -95,7 +95,7 @@ class OuvrierController extends Controller
                 $request->merge(['password' => $hashedPassword]);
             } elseif ($request->filled('email')) {
                 // Générer un mot de passe automatiquement si email fourni mais pas de mot de passe
-                $password = strtoupper(substr($request->prenom, 0, 2)) . substr($request->nom, 0, 2) . rand(100, 999);
+                $password = strtoupper(substr($request->prenom, 0, 2)).substr($request->nom, 0, 2).rand(100, 999);
                 $request->merge(['password' => bcrypt($password)]);
             }
 
@@ -109,24 +109,24 @@ class OuvrierController extends Controller
                         'prenom' => $ouvrier->prenom,
                         'email' => $ouvrier->email,
                         'password' => $password,
-                        'type' => $ouvrier->type
+                        'type' => $ouvrier->type,
                     ]));
                 } catch (\Exception $mailException) {
                     // Continuer même si l'email échoue
-                    \Log::error('Erreur envoi email: ' . $mailException->getMessage());
+                    \Log::error('Erreur envoi email: '.$mailException->getMessage());
                 }
             }
 
             return response()->json([
                 'success' => true,
                 'data' => $ouvrier,
-                'message' => 'Ouvrier cree avec succes' . 
-                    ($password ? ' et email envoye' : '')
+                'message' => 'Ouvrier cree avec succes'.
+                    ($password ? ' et email envoye' : ''),
             ], 201);
         } catch (\Exception $e) {
             return response()->json([
                 'success' => false,
-                'message' => 'Erreur lors de la création de l\'ouvrier: ' . $e->getMessage()
+                'message' => 'Erreur lors de la création de l\'ouvrier: '.$e->getMessage(),
             ], 500);
         }
     }
@@ -137,18 +137,18 @@ class OuvrierController extends Controller
     public function show($id)
     {
         $ouvrier = Ouvrier::find($id);
-        
-        if (!$ouvrier) {
+
+        if (! $ouvrier) {
             return response()->json([
                 'success' => false,
-                'message' => 'Ouvrier non trouvé'
+                'message' => 'Ouvrier non trouvé',
             ], 404);
         }
 
         return response()->json([
             'success' => true,
             'data' => $ouvrier,
-            'message' => 'Ouvrier récupéré avec succès'
+            'message' => 'Ouvrier récupéré avec succès',
         ]);
     }
 
@@ -158,11 +158,11 @@ class OuvrierController extends Controller
     public function update(Request $request, $id)
     {
         $ouvrier = Ouvrier::find($id);
-        
-        if (!$ouvrier) {
+
+        if (! $ouvrier) {
             return response()->json([
                 'success' => false,
-                'message' => 'Ouvrier non trouvé'
+                'message' => 'Ouvrier non trouvé',
             ], 404);
         }
 
@@ -175,14 +175,14 @@ class OuvrierController extends Controller
             'salaire' => 'nullable|numeric|min:0',
             'date_embauche' => 'nullable|date',
             'statut' => 'nullable|in:actif,inactif',
-            'adresse' => 'nullable|string|max:500'
+            'adresse' => 'nullable|string|max:500',
         ]);
 
         if ($validator->fails()) {
             return response()->json([
                 'success' => false,
                 'message' => 'Erreur de validation',
-                'errors' => $validator->errors()
+                'errors' => $validator->errors(),
             ], 422);
         }
 
@@ -196,7 +196,7 @@ class OuvrierController extends Controller
                 $request->merge(['password' => $hashedPassword]);
             } elseif ($request->filled('email')) {
                 // Générer un mot de passe automatiquement si email fourni mais pas de mot de passe
-                $password = strtoupper(substr($request->prenom, 0, 2)) . substr($request->nom, 0, 2) . rand(100, 999);
+                $password = strtoupper(substr($request->prenom, 0, 2)).substr($request->nom, 0, 2).rand(100, 999);
                 $request->merge(['password' => bcrypt($password)]);
             }
 
@@ -210,24 +210,24 @@ class OuvrierController extends Controller
                         'prenom' => $ouvrier->prenom,
                         'email' => $ouvrier->email,
                         'password' => $password,
-                        'type' => $ouvrier->type
+                        'type' => $ouvrier->type,
                     ]));
                 } catch (\Exception $mailException) {
                     // Continuer même si l'email échoue
-                    \Log::error('Erreur envoi email: ' . $mailException->getMessage());
+                    \Log::error('Erreur envoi email: '.$mailException->getMessage());
                 }
             }
 
             return response()->json([
                 'success' => true,
                 'data' => $ouvrier,
-                'message' => 'Ouvrier mis à jour avec succes' . 
-                    ($password ? ' et email envoye' : '')
+                'message' => 'Ouvrier mis à jour avec succes'.
+                    ($password ? ' et email envoye' : ''),
             ]);
         } catch (\Exception $e) {
             return response()->json([
                 'success' => false,
-                'message' => 'Erreur lors de la mise à jour de l\'ouvrier: ' . $e->getMessage()
+                'message' => 'Erreur lors de la mise à jour de l\'ouvrier: '.$e->getMessage(),
             ], 500);
         }
     }
@@ -238,26 +238,26 @@ class OuvrierController extends Controller
     public function destroy($id)
     {
         $ouvrier = Ouvrier::find($id);
-        
-        if (!$ouvrier) {
+
+        if (! $ouvrier) {
             return response()->json([
                 'success' => false,
-                'message' => 'Ouvrier non trouvé'
+                'message' => 'Ouvrier non trouvé',
             ], 404);
         }
 
         try {
             $ouvrier->delete();
-            
+
             return response()->json([
                 'success' => true,
-                'message' => 'Ouvrier supprimé avec succès'
+                'message' => 'Ouvrier supprimé avec succès',
             ]);
-            
+
         } catch (\Exception $e) {
             return response()->json([
                 'success' => false,
-                'message' => 'Erreur lors de la suppression de l\'ouvrier: ' . $e->getMessage()
+                'message' => 'Erreur lors de la suppression de l\'ouvrier: '.$e->getMessage(),
             ], 500);
         }
     }
@@ -271,7 +271,7 @@ class OuvrierController extends Controller
         $actifs = Ouvrier::actifs()->count();
         $techniciens = Ouvrier::byType('technicien')->count();
         $mecaniciens = Ouvrier::byType('mecanicien')->count();
-        
+
         return response()->json([
             'success' => true,
             'data' => [
@@ -279,9 +279,9 @@ class OuvrierController extends Controller
                 'ouvriers_actifs' => $actifs,
                 'techniciens' => $techniciens,
                 'mecaniciens' => $mecaniciens,
-                'ouvriers_inactifs' => $total - $actifs
+                'ouvriers_inactifs' => $total - $actifs,
             ],
-            'message' => 'Statistiques des ouvriers récupérées avec succès'
+            'message' => 'Statistiques des ouvriers récupérées avec succès',
         ]);
     }
 }

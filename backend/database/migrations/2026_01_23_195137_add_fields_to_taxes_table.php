@@ -11,12 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-       Schema::table('taxes', function (Blueprint $table) {
-        $table->date('date_expiration')->nullable();
-        $table->string('recu')->nullable();
-        $table->text('remarque')->nullable();
-        
-    });
+        Schema::table('taxes', function (Blueprint $table) {
+            $table->date('date_expiration')->nullable();
+            $table->string('recu')->nullable();
+            $table->text('remarque')->nullable();
+
+        });
     }
 
     /**
@@ -25,7 +25,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('taxes', function (Blueprint $table) {
-            $table->dropColumn([ 'date_expiration', 'recu', 'remarque']);
-    });
+            $table->dropColumn(['date_expiration', 'recu', 'remarque']);
+        });
     }
 };

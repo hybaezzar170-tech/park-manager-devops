@@ -5,8 +5,8 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Maintenance;
 use App\Models\Voiture;
-use Illuminate\Http\Request;
 use Carbon\Carbon;
+use Illuminate\Http\Request;
 
 class MaintenanceController extends Controller
 {
@@ -16,7 +16,7 @@ class MaintenanceController extends Controller
             $maintenances = Maintenance::with('voiture')
                 ->orderBy('created_at', 'desc')
                 ->get();
-            
+
             return response()->json($maintenances);
         } catch (\Exception $e) {
             return response()->json(['error' => 'Failed to fetch maintenances'], 500);
@@ -28,7 +28,7 @@ class MaintenanceController extends Controller
         try {
             // Log des données reçues
             \Log::info('Maintenance store request:', $request->all());
-            
+
             // Récupérer les données essentielles
             $data = [
                 'voiture_id' => $request->input('voiture_id'),
@@ -39,11 +39,11 @@ class MaintenanceController extends Controller
                 'date_fin_prevue' => $request->input('date_fin_prevue'),
                 'technicien' => $request->input('technicien'),
                 'notes' => $request->input('notes'),
-                'statut' => 'en_cours'
+                'statut' => 'en_cours',
             ];
-            
+
             \Log::info('Processed maintenance data:', $data);
-            
+
             // Update voiture status to en_maintenance
             $voiture = Voiture::find($data['voiture_id']);
             if ($voiture) {
@@ -51,24 +51,25 @@ class MaintenanceController extends Controller
                 $voiture->save();
                 \Log::info('Voiture status updated to en_maintenance');
             } else {
-                \Log::error('Voiture not found with ID: ' . $data['voiture_id']);
+                \Log::error('Voiture not found with ID: '.$data['voiture_id']);
             }
 
             // Create maintenance
             $maintenance = Maintenance::create($data);
-            \Log::info('Maintenance created with ID: ' . $maintenance->id);
-            
+            \Log::info('Maintenance created with ID: '.$maintenance->id);
+
             return response()->json([
                 'success' => true,
                 'data' => $maintenance,
-                'message' => 'Maintenance created successfully'
+                'message' => 'Maintenance created successfully',
             ], 201);
-            
+
         } catch (\Exception $e) {
-            \Log::error('Error creating maintenance: ' . $e->getMessage());
+            \Log::error('Error creating maintenance: '.$e->getMessage());
+
             return response()->json([
                 'success' => false,
-                'message' => 'Failed to create maintenance: ' . $e->getMessage()
+                'message' => 'Failed to create maintenance: '.$e->getMessage(),
             ], 500);
         }
     }
@@ -77,6 +78,7 @@ class MaintenanceController extends Controller
     {
         try {
             $maintenance = Maintenance::with('voiture')->findOrFail($id);
+
             return response()->json($maintenance);
         } catch (\Exception $e) {
             return response()->json(['error' => 'Maintenance not found'], 404);
@@ -87,7 +89,7 @@ class MaintenanceController extends Controller
     {
         try {
             $maintenance = Maintenance::findOrFail($id);
-            
+
             $request->validate([
                 'description' => 'nullable|string',
                 'cout' => 'nullable|numeric|min:0',
@@ -105,15 +107,16 @@ class MaintenanceController extends Controller
                 $voiture = $maintenance->voiture;
                 $voiture->etat = 'disponible';
                 $voiture->save();
-                
+
                 // Set end date if not provided
-                if (!$request->date_fin_reelle) {
+                if (! $request->date_fin_reelle) {
                     $maintenance->date_fin_reelle = now();
                     $maintenance->save();
                 }
             }
 
             $maintenance->load('voiture');
+
             return response()->json($maintenance);
         } catch (\Exception $e) {
             return response()->json(['error' => 'Failed to update maintenance'], 500);
@@ -124,14 +127,14 @@ class MaintenanceController extends Controller
     {
         try {
             $maintenance = Maintenance::findOrFail($id);
-            
+
             // Update voiture status back to disponible
             $voiture = $maintenance->voiture;
             $voiture->etat = 'disponible';
             $voiture->save();
-            
+
             $maintenance->delete();
-            
+
             return response()->json(['message' => 'Maintenance deleted successfully']);
         } catch (\Exception $e) {
             return response()->json(['error' => 'Failed to delete maintenance'], 500);
@@ -145,17 +148,18 @@ class MaintenanceController extends Controller
                 ->where('statut', 'en_cours')
                 ->orderBy('date_debut', 'desc')
                 ->get();
-            
+
             // Debug log
             \Log::info('Active maintenances fetched:', ['count' => $maintenances->count()]);
-            
+
             return response()->json([
                 'success' => true,
                 'data' => $maintenances,
-                'count' => $maintenances->count()
+                'count' => $maintenances->count(),
             ]);
         } catch (\Exception $e) {
-            \Log::error('Failed to fetch active maintenances: ' . $e->getMessage());
+            \Log::error('Failed to fetch active maintenances: '.$e->getMessage());
+
             return response()->json(['error' => 'Failed to fetch active maintenances'], 500);
         }
     }
@@ -167,7 +171,7 @@ class MaintenanceController extends Controller
                 ->with('voiture')
                 ->orderBy('created_at', 'desc')
                 ->get();
-            
+
             return response()->json($maintenances);
         } catch (\Exception $e) {
             return response()->json(['error' => 'Failed to fetch maintenance history'], 500);
@@ -191,7 +195,7 @@ class MaintenanceController extends Controller
                     ->distinct('voiture_id')
                     ->count(),
             ];
-            
+
             return response()->json($stats);
         } catch (\Exception $e) {
             return response()->json(['error' => 'Failed to fetch maintenance stats'], 500);
@@ -247,7 +251,7 @@ class MaintenanceController extends Controller
 
             return response()->json([
                 'message' => 'Expired services checked successfully',
-                'updated_count' => $updatedCount
+                'updated_count' => $updatedCount,
             ]);
         } catch (\Exception $e) {
             return response()->json(['error' => 'Failed to check expired services'], 500);

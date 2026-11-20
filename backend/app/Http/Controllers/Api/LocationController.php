@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\Models\Location;
 use App\Models\Voiture;
+use Illuminate\Http\Request;
 
 class LocationController extends Controller
 {
@@ -23,16 +23,16 @@ class LocationController extends Controller
                 'date_location' => 'required|date',
                 'date_fin' => 'required|date|after_or_equal:date_location',
                 'prix_location' => 'required|numeric',
-                'etat' => 'nullable|in:en_cours,terminee,annulee'
+                'etat' => 'nullable|in:en_cours,terminee,annulee',
             ]);
 
             // S'assurer que les dates sont valides
             $dateLocation = \Carbon\Carbon::parse($validated['date_location']);
             $dateFin = \Carbon\Carbon::parse($validated['date_fin']);
-            
+
             if ($dateFin->lt($dateLocation)) {
                 return response()->json([
-                    'error' => 'La date de fin doit être supérieure ou égale à la date de location'
+                    'error' => 'La date de fin doit être supérieure ou égale à la date de location',
                 ], 400);
             }
 
@@ -50,9 +50,10 @@ class LocationController extends Controller
 
             return response()->json($location, 201);
         } catch (\Exception $e) {
-            \Log::error('Location creation error: ' . $e->getMessage());
+            \Log::error('Location creation error: '.$e->getMessage());
+
             return response()->json([
-                'error' => 'Erreur lors de l\'enregistrement: ' . $e->getMessage()
+                'error' => 'Erreur lors de l\'enregistrement: '.$e->getMessage(),
             ], 500);
         }
     }
@@ -68,7 +69,7 @@ class LocationController extends Controller
                 'locations.*.date_location' => 'required|date',
                 'locations.*.date_fin' => 'required|date|after_or_equal:locations.*.date_location',
                 'locations.*.prix_location' => 'required|numeric',
-                'locations.*.etat' => 'nullable|in:en_cours,terminee,annulee'
+                'locations.*.etat' => 'nullable|in:en_cours,terminee,annulee',
             ]);
 
             $createdLocations = [];
@@ -79,16 +80,18 @@ class LocationController extends Controller
                     // Vérifier que les dates sont valides
                     $dateLocation = \Carbon\Carbon::parse($locationData['date_location']);
                     $dateFin = \Carbon\Carbon::parse($locationData['date_fin']);
-                    
+
                     if ($dateFin->lt($dateLocation)) {
-                        $errors[] = "Location " . ($index + 1) . ": La date de fin doit être supérieure ou égale à la date de location";
+                        $errors[] = 'Location '.($index + 1).': La date de fin doit être supérieure ou égale à la date de location';
+
                         continue;
                     }
 
                     $voiture = Voiture::findOrFail($locationData['voiture_id']);
 
                     if ($voiture->etat === 'en_location') {
-                        $errors[] = "Location " . ($index + 1) . ": Voiture " . $voiture->matricule . " déjà en location";
+                        $errors[] = 'Location '.($index + 1).': Voiture '.$voiture->matricule.' déjà en location';
+
                         continue;
                     }
 
@@ -100,28 +103,29 @@ class LocationController extends Controller
 
                     $createdLocations[] = $location;
                 } catch (\Exception $e) {
-                    $errors[] = "Location " . ($index + 1) . ": " . $e->getMessage();
+                    $errors[] = 'Location '.($index + 1).': '.$e->getMessage();
                 }
             }
 
-            if (!empty($errors)) {
+            if (! empty($errors)) {
                 return response()->json([
                     'message' => 'Certaines locations n\'ont pas pu être créées',
                     'created' => $createdLocations,
-                    'errors' => $errors
+                    'errors' => $errors,
                 ], 207); // Multi-Status
             }
 
             return response()->json([
-                'message' => count($createdLocations) . ' location(s) créée(s) avec succès',
-                'data' => $createdLocations
+                'message' => count($createdLocations).' location(s) créée(s) avec succès',
+                'data' => $createdLocations,
             ], 201);
 
         } catch (\Exception $e) {
-            \Log::error('Bulk location creation error: ' . $e->getMessage());
+            \Log::error('Bulk location creation error: '.$e->getMessage());
+
             return response()->json([
                 'message' => 'Erreur lors de la création des locations',
-                'error' => $e->getMessage()
+                'error' => $e->getMessage(),
             ], 500);
         }
     }
@@ -141,13 +145,13 @@ class LocationController extends Controller
             'date_location' => 'sometimes|required|date',
             'date_fin' => 'sometimes|required|date|after_or_equal:date_location',
             'prix_location' => 'sometimes|required|numeric',
-            'etat' => 'sometimes|required|in:en_cours,terminee,annulee'
+            'etat' => 'sometimes|required|in:en_cours,terminee,annulee',
         ]);
 
         $location->update($validated);
 
         // Si location terminée ou annulée, mettre voiture disponible
-        if(isset($validated['etat']) && in_array($validated['etat'], ['terminee','annulee'])){
+        if (isset($validated['etat']) && in_array($validated['etat'], ['terminee', 'annulee'])) {
             $voiture = $location->voiture;
             $voiture->etat = 'disponible';
             $voiture->save();
@@ -162,13 +166,13 @@ class LocationController extends Controller
         $voiture = $location->voiture;
 
         // Si location supprimée alors voiture disponible
-        if($voiture->etat === 'en_location'){
+        if ($voiture->etat === 'en_location') {
             $voiture->etat = 'disponible';
             $voiture->save();
         }
 
         $location->delete();
 
-        return response()->json(['message'=>'Location supprimée avec succès']);
+        return response()->json(['message' => 'Location supprimée avec succès']);
     }
 }
