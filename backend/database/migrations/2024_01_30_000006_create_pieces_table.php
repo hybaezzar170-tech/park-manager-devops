@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('type_piece')->nullable();
             $table->timestamps();
 
-            $table->foreign('fournisseur_id')->references('id')->on('fournisseurs')->onDelete('set null');
+
         });
     }
 
