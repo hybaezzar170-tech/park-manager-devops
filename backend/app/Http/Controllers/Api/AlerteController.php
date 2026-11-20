@@ -41,11 +41,11 @@ class AlerteController extends Controller
         $urgentDays = 1;   // Alert 1 day before expiration
 
         // Check Assurances
-        $assurances = Assurance::with('voiture')->get();
+        $assurances = Assurance::with('voiture')->whereHas('voiture', fn ($query) => $query->where('etat', '!=', 'vendue'))->get();
         foreach ($assurances as $assurance) {
             if ($assurance->date_expiration) {
                 $expirationDate = Carbon::parse($assurance->date_expiration);
-                $daysUntil = $today->diffInDays($expirationDate, false);
+                $daysUntil = $today->copy()->startOfDay()->diffInDays($expirationDate->copy()->startOfDay(), false);
 
                 // Show expired items as urgent
                 if ($daysUntil < 0) {
@@ -83,11 +83,11 @@ class AlerteController extends Controller
         }
 
         // Check Taxes Circulation
-        $taxes = TaxeCirculation::with('voiture')->get();
+        $taxes = TaxeCirculation::with('voiture')->whereHas('voiture', fn ($query) => $query->where('etat', '!=', 'vendue'))->get();
         foreach ($taxes as $taxe) {
             if ($taxe->date_expiration) {
                 $expirationDate = Carbon::parse($taxe->date_expiration);
-                $daysUntil = $today->diffInDays($expirationDate, false);
+                $daysUntil = $today->copy()->startOfDay()->diffInDays($expirationDate->copy()->startOfDay(), false);
 
                 // Show expired items as urgent
                 if ($daysUntil < 0) {
@@ -125,11 +125,11 @@ class AlerteController extends Controller
         }
 
         // Check Visites Techniques
-        $visites = Visite::with('voiture')->get();
+        $visites = Visite::with('voiture')->whereHas('voiture', fn ($query) => $query->where('etat', '!=', 'vendue'))->get();
         foreach ($visites as $visite) {
             if ($visite->prochaine_visite) {
                 $expirationDate = Carbon::parse($visite->prochaine_visite);
-                $daysUntil = $today->diffInDays($expirationDate, false);
+                $daysUntil = $today->copy()->startOfDay()->diffInDays($expirationDate->copy()->startOfDay(), false);
 
                 // Show expired items as urgent
                 if ($daysUntil < 0) {
