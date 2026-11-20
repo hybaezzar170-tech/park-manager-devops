@@ -25,6 +25,9 @@ jobs:
       - name: Installer les dépendances
         run: composer install --no-interaction --prefer-dist --no-progress
 
+      - name: Contrôler le style du code (Pint)
+        run: ./vendor/bin/pint --test
+
       - name: Vérifier la conformité PSR-4 (sensible à la casse sous Linux)
         run: composer dump-autoload --optimize --strict-psr
 
