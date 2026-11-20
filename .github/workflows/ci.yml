@@ -68,7 +68,7 @@ jobs:
       - name: Exécuter les tests PHPUnit
         run: |
           mkdir -p reports
-          vendor/bin/phpunit --log-junit reports/junit.xml
+          php vendor/bin/phpunit --log-junit reports/junit.xml
 
       - name: Archiver le rapport PHPUnit
         if: always()
