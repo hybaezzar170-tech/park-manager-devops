@@ -4,25 +4,16 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Departement;
-use App\Models\Conducteur;
-use App\Models\Fournisseur;
-use App\Models\Location;
-use App\Models\Vente;
-use App\Models\Maintenance;
-use App\Models\Reparation;
-use App\Models\Assurance;
-use App\Models\Visite;
-use App\Models\TaxeCirculation;
 
 class Voiture extends Model
 {
     use HasFactory;
+
     protected $fillable = [
-        'matricule','modele','num_serie',
-        'departement_id','conducteur_id','marque','couleur',
-        'mise_en_circulation','carburant','etat',
-        'prix_achat', 'date_achat', 'fournisseur_id'
+        'matricule', 'modele', 'num_serie',
+        'departement_id', 'conducteur_id', 'marque', 'couleur',
+        'mise_en_circulation', 'carburant', 'etat',
+        'prix_achat', 'date_achat', 'fournisseur_id',
     ];
 
     public function fournisseur()
@@ -80,8 +71,3 @@ class Voiture extends Model
         return $this->hasOne(Maintenance::class)->where('statut', 'en_cours');
     }
 }
-
-  
-
-   
-

@@ -9,16 +9,16 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('voitures', function (Blueprint $table) {
-            if (!Schema::hasColumn('voitures', 'etat')) {
+            if (! Schema::hasColumn('voitures', 'etat')) {
                 $table->string('etat')->default('disponible');
             }
-            if (!Schema::hasColumn('voitures', 'prix_achat')) {
+            if (! Schema::hasColumn('voitures', 'prix_achat')) {
                 $table->decimal('prix_achat', 10, 2)->nullable();
             }
-            if (!Schema::hasColumn('voitures', 'date_achat')) {
+            if (! Schema::hasColumn('voitures', 'date_achat')) {
                 $table->date('date_achat')->nullable();
             }
-            if (!Schema::hasColumn('voitures', 'fournisseur_id')) {
+            if (! Schema::hasColumn('voitures', 'fournisseur_id')) {
                 $table->foreignId('fournisseur_id')->nullable()->constrained('fournisseurs')->onDelete('set null');
             }
         });

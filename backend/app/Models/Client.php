@@ -14,7 +14,7 @@ class Client extends Model
         'prenom',
         'telephone',
         'email',
-        'adresse'
+        'adresse',
     ];
 
     protected $casts = [
@@ -31,6 +31,6 @@ class Client extends Model
     // Accesseur pour le nom complet
     public function getNomCompletAttribute()
     {
-        return $this->nom . ' ' . $this->prenom;
+        return $this->nom.' '.$this->prenom;
     }
 }

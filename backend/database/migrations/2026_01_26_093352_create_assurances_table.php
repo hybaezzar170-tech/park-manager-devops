@@ -11,17 +11,17 @@ return new class extends Migration
      */
     public function up(): void
     {
-    Schema::create('assurances', function (Blueprint $table) {
-    $table->id();
-    $table->foreignId('voiture_id')->constrained()->onDelete('cascade');
-    $table->foreignId('fournisseur_id')->nullable()->constrained()->onDelete('set null');
-    $table->string('type_assurance');
-    $table->date('date_debut');
-    $table->date('date_expiration');
-    $table->integer('rappel_jours')->default(0);
-    $table->text('note')->nullable();
-    $table->timestamps();
-});
+        Schema::create('assurances', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('voiture_id')->constrained()->onDelete('cascade');
+            $table->foreignId('fournisseur_id')->nullable()->constrained()->onDelete('set null');
+            $table->string('type_assurance');
+            $table->date('date_debut');
+            $table->date('date_expiration');
+            $table->integer('rappel_jours')->default(0);
+            $table->text('note')->nullable();
+            $table->timestamps();
+        });
     }
 
     /**

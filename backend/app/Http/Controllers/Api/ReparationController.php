@@ -13,7 +13,7 @@ class ReparationController extends Controller
         $reparations = Reparation::with(['voiture', 'mecanicien', 'pieces'])
             ->orderBy('created_at', 'desc')
             ->get();
-        
+
         return response()->json($reparations);
     }
 
@@ -28,7 +28,7 @@ class ReparationController extends Controller
             'voiture_id' => 'nullable|exists:voitures,id',
             'mecanicien_id' => 'nullable|exists:ouvriers,id',
             'pieces_utilisees' => 'array',
-            'pieces_utilisees.*' => 'exists:pieces,id'
+            'pieces_utilisees.*' => 'exists:pieces,id',
         ]);
 
         $reparation = Reparation::create($request->all());
@@ -38,7 +38,7 @@ class ReparationController extends Controller
             $piecesData = [];
             foreach ($request->pieces_utilisees as $pieceId) {
                 $piecesData[$pieceId] = ['quantite_utilisee' => 1];
-                
+
                 // Déduire la quantité de la pièce
                 $piece = \App\Models\Piece::find($pieceId);
                 if ($piece && $piece->quantite > 0) {
@@ -67,7 +67,7 @@ class ReparationController extends Controller
             'voiture_id' => 'nullable|exists:voitures,id',
             'mecanicien_id' => 'nullable|exists:ouvriers,id',
             'pieces_utilisees' => 'array',
-            'pieces_utilisees.*' => 'exists:pieces,id'
+            'pieces_utilisees.*' => 'exists:pieces,id',
         ]);
 
         $reparation->update($request->all());
@@ -76,7 +76,7 @@ class ReparationController extends Controller
         if ($request->has('pieces_utilisees')) {
             // Récupérer les anciennes pièces pour remettre les quantités
             $oldPieces = $reparation->pieces()->pluck('piece_id')->toArray();
-            
+
             // Remettre les quantités des anciennes pièces
             foreach ($oldPieces as $pieceId) {
                 $piece = \App\Models\Piece::find($pieceId);
@@ -84,15 +84,15 @@ class ReparationController extends Controller
                     $piece->increment('quantite', 1);
                 }
             }
-            
+
             // Détacher toutes les anciennes pièces
             $reparation->pieces()->detach();
-            
+
             // Attacher les nouvelles pièces et déduire les quantités
             $piecesData = [];
             foreach ($request->pieces_utilisees as $pieceId) {
                 $piecesData[$pieceId] = ['quantite_utilisee' => 1];
-                
+
                 // Déduire la quantité de la pièce
                 $piece = \App\Models\Piece::find($pieceId);
                 if ($piece && $piece->quantite > 0) {
@@ -112,10 +112,10 @@ class ReparationController extends Controller
         foreach ($pieces as $piece) {
             $piece->increment('quantite', $piece->pivot->quantite_utilisee);
         }
-        
+
         $reparation->pieces()->detach();
         $reparation->delete();
-        
+
         return response()->json(null, 204);
     }
 }

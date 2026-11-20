@@ -45,6 +45,7 @@ class Maintenance extends Model
         } elseif ($this->date_fin_prevue) {
             return $this->date_debut->diffInDays($this->date_fin_prevue);
         }
+
         return null;
     }
 
@@ -53,6 +54,7 @@ class Maintenance extends Model
         if ($this->statut === 'en_cours' && $this->date_fin_prevue) {
             return now()->greaterThan($this->date_fin_prevue);
         }
+
         return false;
     }
 }

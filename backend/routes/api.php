@@ -1,27 +1,27 @@
 <?php
 
+use App\Http\Controllers\Api\AlerteController;
+use App\Http\Controllers\Api\AssuranceController;
+use App\Http\Controllers\Api\ClientController;
+use App\Http\Controllers\Api\ConducteurController;
+use App\Http\Controllers\Api\DepartementController;
+use App\Http\Controllers\Api\ExpirationAlertController;
+use App\Http\Controllers\Api\FournisseurController;
+use App\Http\Controllers\Api\LocationController;
+use App\Http\Controllers\Api\MaintenanceController;
+use App\Http\Controllers\Api\OuvrierController;
+use App\Http\Controllers\Api\PieceController;
+use App\Http\Controllers\Api\ReclamationController;
+use App\Http\Controllers\Api\ReparationController;
+use App\Http\Controllers\Api\StatisticsController;
+use App\Http\Controllers\Api\TaxeCirculationController;
+use App\Http\Controllers\Api\TaxeController;
+use App\Http\Controllers\Api\UserController;
+use App\Http\Controllers\Api\VenteController;
+use App\Http\Controllers\Api\VisiteController;
+use App\Http\Controllers\Api\VoitureController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Api\VoitureController;
-use App\Http\Controllers\Api\DepartementController;
-use App\Http\Controllers\Api\ConducteurController;
-use App\Http\Controllers\Api\FournisseurController;
-use App\Http\Controllers\Api\PieceController;
-use App\Http\Controllers\Api\AlerteController;
-use App\Http\Controllers\Api\ExpirationAlertController;
-use App\Http\Controllers\Api\VisiteController;
-use App\Http\Controllers\Api\StatisticsController;
-use App\Http\Controllers\Api\UserController;
-use App\Http\Controllers\Api\MaintenanceController;
-use App\Http\Controllers\Api\ReparationController;
-use App\Http\Controllers\Api\OuvrierController;
-use App\Http\Controllers\Api\VenteController;
-use App\Http\Controllers\Api\LocationController;
-use App\Http\Controllers\Api\TaxeController;
-use App\Http\Controllers\Api\ClientController;
-use App\Http\Controllers\Api\AssuranceController;
-use App\Http\Controllers\Api\ReclamationController;
-use App\Http\Controllers\Api\TaxeCirculationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -73,19 +73,19 @@ Route::apiResource('maintenances', MaintenanceController::class);
 Route::apiResource('clients', ClientController::class);
 Route::get('clients/search', [ClientController::class, 'search']);
 
-    // Extra routes
-    Route::get('fournisseurs/pieces-suppliers', [FournisseurController::class, 'piecesSuppliers']);
-    Route::get('pieces/with-auto-suppliers', [PieceController::class, 'piecesWithAutoSuppliers']);
-    Route::get('statistics', [StatisticsController::class, 'index']);
-    Route::get('ouvriers/actifs', [OuvrierController::class, 'actifs']);
-    Route::get('ouvriers/type/{type}', [OuvrierController::class, 'byType']);
-    Route::get('ouvriers/statistics', [OuvrierController::class, 'statistics']);
-   Route::get('maintenances/active', [MaintenanceController::class, 'getActiveMaintenances']);
+// Extra routes
+Route::get('fournisseurs/pieces-suppliers', [FournisseurController::class, 'piecesSuppliers']);
+Route::get('pieces/with-auto-suppliers', [PieceController::class, 'piecesWithAutoSuppliers']);
+Route::get('statistics', [StatisticsController::class, 'index']);
+Route::get('ouvriers/actifs', [OuvrierController::class, 'actifs']);
+Route::get('ouvriers/type/{type}', [OuvrierController::class, 'byType']);
+Route::get('ouvriers/statistics', [OuvrierController::class, 'statistics']);
+Route::get('maintenances/active', [MaintenanceController::class, 'getActiveMaintenances']);
 Route::put('maintenances/{maintenance}', [MaintenanceController::class, 'update']);
 Route::post('maintenances', [MaintenanceController::class, 'store']);
-    Route::get('voitures/{voitureId}/maintenances', [MaintenanceController::class, 'getMaintenanceHistory']);
-    Route::post('maintenances/check-expired', [MaintenanceController::class, 'checkExpiredServices']);
-    Route::get('reclamations/user', [ReclamationController::class, 'getUserReclamations']);
-    Route::get('reclamations/statistics', [ReclamationController::class, 'getStatistics']);
+Route::get('voitures/{voitureId}/maintenances', [MaintenanceController::class, 'getMaintenanceHistory']);
+Route::post('maintenances/check-expired', [MaintenanceController::class, 'checkExpiredServices']);
+Route::get('reclamations/user', [ReclamationController::class, 'getUserReclamations']);
+Route::get('reclamations/statistics', [ReclamationController::class, 'getStatistics']);
 Route::apiResource('reclamations', ReclamationController::class);
 Route::put('reclamations/{reclamation}', [ReclamationController::class, 'update']);

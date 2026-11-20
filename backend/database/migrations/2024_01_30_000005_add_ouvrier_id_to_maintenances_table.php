@@ -13,13 +13,13 @@ return new class extends Migration
     {
         Schema::table('maintenances', function (Blueprint $table) {
             // Add ouvrier_id column if it doesn't exist
-            if (!Schema::hasColumn('maintenances', 'ouvrier_id')) {
+            if (! Schema::hasColumn('maintenances', 'ouvrier_id')) {
                 $table->unsignedBigInteger('ouvrier_id')->nullable()->after('statut');
                 $table->foreign('ouvrier_id')->references('id')->on('ouvriers')->onDelete('set null');
             }
-            
+
             // Add statut column if it doesn't exist
-            if (!Schema::hasColumn('maintenances', 'statut')) {
+            if (! Schema::hasColumn('maintenances', 'statut')) {
                 $table->enum('statut', ['en_cours', 'terminee', 'annulee'])->default('en_cours')->after('date_fin_reelle');
             }
         });
@@ -35,7 +35,7 @@ return new class extends Migration
                 $table->dropForeign(['ouvrier_id']);
                 $table->dropColumn('ouvrier_id');
             }
-            
+
             if (Schema::hasColumn('maintenances', 'statut')) {
                 $table->dropColumn('statut');
             }

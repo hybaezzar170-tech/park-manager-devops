@@ -2,11 +2,11 @@
 
 namespace App\Console\Commands;
 
-use Illuminate\Console\Command;
+use App\Models\Location;
 use App\Models\Maintenance;
 use App\Models\Voiture;
-use App\Models\Location;
 use Carbon\Carbon;
+use Illuminate\Console\Command;
 
 class CheckExpiredServices extends Command
 {
@@ -76,6 +76,7 @@ class CheckExpiredServices extends Command
         }
 
         $this->info("Checked expired services. Updated {$updatedCount} records.");
+
         return 0;
     }
 }

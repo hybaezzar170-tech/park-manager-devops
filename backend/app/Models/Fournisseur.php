@@ -10,7 +10,7 @@ class Fournisseur extends Model
     use HasFactory;
 
     protected $fillable = [
-        'nom','prenom','type','email','tel','fax','site_web','adresse','ville','code_postal','contact'
+        'nom', 'prenom', 'type', 'email', 'tel', 'fax', 'site_web', 'adresse', 'ville', 'code_postal', 'contact',
     ];
 
     public function pieces1()

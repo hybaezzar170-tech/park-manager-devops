@@ -11,7 +11,7 @@ return new class extends Migration
         Schema::create('fournisseurs', function (Blueprint $table) {
             $table->id();
             $table->string('nom');
-            $table->string('prenom'); 
+            $table->string('prenom');
             $table->string('type'); // Vente véhicule, etc.
             $table->string('email')->nullable()->unique();
             $table->string('tel');

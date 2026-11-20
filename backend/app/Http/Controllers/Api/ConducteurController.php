@@ -14,6 +14,7 @@ class ConducteurController extends Controller
         if ($request->query('all') === 'true') {
             return response()->json(Conducteur::all(), 200);
         }
+
         return response()->json(Conducteur::where('etat', 'actif')->get(), 200);
     }
 
@@ -31,7 +32,7 @@ class ConducteurController extends Controller
             'telephone' => 'required|string|max:20',
             'email' => 'required|email|unique:conducteurs',
             'password' => 'nullable|string|min:6',
-            'etat' => 'nullable|string|in:actif,inactif'
+            'etat' => 'nullable|string|in:actif,inactif',
         ]);
 
         // Générer un mot de passe aléatoire si non fourni
@@ -52,13 +53,13 @@ class ConducteurController extends Controller
         // Préparer la réponse
         $response = [
             'message' => 'Conducteur ajouté avec succès',
-            'data' => $conducteur
+            'data' => $conducteur,
         ];
 
         // Ajouter le mot de passe généré à la réponse seulement si généré
         if ($generatedPassword) {
             $response['password'] = $generatedPassword;
-            $response['message'] .= ' - Mot de passe généré : ' . $generatedPassword . ' (à communiquer au conducteur)';
+            $response['message'] .= ' - Mot de passe généré : '.$generatedPassword.' (à communiquer au conducteur)';
         }
 
         return response()->json($response, 201);
@@ -68,7 +69,7 @@ class ConducteurController extends Controller
     {
         $conducteur = Conducteur::find($id);
 
-        if (!$conducteur) {
+        if (! $conducteur) {
             return response()->json(['message' => 'Conducteur introuvable'], 404);
         }
 
@@ -79,7 +80,7 @@ class ConducteurController extends Controller
     {
         $conducteur = Conducteur::find($id);
 
-        if (!$conducteur) {
+        if (! $conducteur) {
             return response()->json(['message' => 'Conducteur introuvable'], 404);
         }
 
@@ -88,21 +89,21 @@ class ConducteurController extends Controller
             'prenom' => 'sometimes|required|string|max:100',
             'date_naissance' => 'sometimes|required|date',
             'date_embauche' => 'sometimes|required|date',
-            'numero_permis' => 'sometimes|required|string|unique:conducteurs,numero_permis,' . $id,
+            'numero_permis' => 'sometimes|required|string|unique:conducteurs,numero_permis,'.$id,
             'adresse' => 'sometimes|required|string',
             'ville' => 'sometimes|required|string',
             'code_postal' => 'sometimes|required|string|max:10',
             'telephone' => 'sometimes|required|string|max:20',
-            'email' => 'sometimes|required|email|unique:conducteurs,email,' . $id,
+            'email' => 'sometimes|required|email|unique:conducteurs,email,'.$id,
             'password' => 'nullable|string|min:6',
-            'etat' => 'nullable|string|in:actif,inactif'
+            'etat' => 'nullable|string|in:actif,inactif',
         ]);
 
         $conducteur->update($validated);
 
         return response()->json([
             'message' => 'Conducteur modifié avec succès',
-            'data' => $conducteur
+            'data' => $conducteur,
         ], 200);
     }
 
@@ -110,7 +111,7 @@ class ConducteurController extends Controller
     {
         $conducteur = Conducteur::find($id);
 
-        if (!$conducteur) {
+        if (! $conducteur) {
             return response()->json(['message' => 'Conducteur introuvable'], 404);
         }
 
@@ -123,7 +124,7 @@ class ConducteurController extends Controller
     {
         $conducteur = Conducteur::find($id);
 
-        if (!$conducteur) {
+        if (! $conducteur) {
             return response()->json(['message' => 'Conducteur introuvable'], 404);
         }
 
@@ -132,7 +133,7 @@ class ConducteurController extends Controller
 
         return response()->json([
             'message' => 'État du conducteur modifié avec succès',
-            'data' => $conducteur
+            'data' => $conducteur,
         ], 200);
     }
 
@@ -140,12 +141,12 @@ class ConducteurController extends Controller
     {
         $validated = $request->validate([
             'email' => 'required|email',
-            'password' => 'required|string'
+            'password' => 'required|string',
         ]);
 
         $conducteur = Conducteur::where('email', $validated['email'])->first();
 
-        if (!$conducteur) {
+        if (! $conducteur) {
             return response()->json(['message' => 'Email ou mot de passe incorrect'], 401);
         }
 
@@ -155,17 +156,17 @@ class ConducteurController extends Controller
         }
 
         // Vérifier le mot de passe
-        if (!password_verify($validated['password'], $conducteur->password)) {
+        if (! password_verify($validated['password'], $conducteur->password)) {
             return response()->json(['message' => 'Email ou mot de passe incorrect'], 401);
         }
 
         // Générer un token simple (pour cet exemple)
-        $token = base64_encode($conducteur->email . ':' . time());
+        $token = base64_encode($conducteur->email.':'.time());
 
         return response()->json([
             'message' => 'Connexion réussie',
             'conducteur' => $conducteur,
-            'token' => $token
+            'token' => $token,
         ], 200);
     }
 }

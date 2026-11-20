@@ -2,8 +2,8 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Seeder;
 use App\Models\Departement;
+use Illuminate\Database\Seeder;
 
 class LivraisonMarchandiseSeeder extends Seeder
 {
@@ -14,7 +14,7 @@ class LivraisonMarchandiseSeeder extends Seeder
             ['nom' => 'Distribution Régionale', 'type' => 'utilitaire'],
             ['nom' => 'Livraison Express', 'type' => 'utilitaire'],
             ['nom' => 'Transport Marchandises', 'type' => 'utilitaire'],
-            ['nom' => 'Service Messagerie', 'type' => 'utilitaire']
+            ['nom' => 'Service Messagerie', 'type' => 'utilitaire'],
         ];
 
         foreach ($departements as $departement) {

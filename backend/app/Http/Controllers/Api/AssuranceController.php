@@ -3,14 +3,14 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\Models\Assurance;
+use Illuminate\Http\Request;
 
 class AssuranceController extends Controller
 {
     public function index()
     {
-        return Assurance::with(['voiture','fournisseur'])->get();
+        return Assurance::with(['voiture', 'fournisseur'])->get();
     }
 
     public function store(Request $request)
@@ -22,22 +22,24 @@ class AssuranceController extends Controller
             'date_debut' => 'required|date',
             'date_expiration' => 'required|date',
             'rappel_jours' => 'nullable|integer',
-            'note' => 'nullable|string'
+            'note' => 'nullable|string',
         ]);
 
         $assurance = Assurance::create($validated);
+
         return response()->json($assurance, 201);
     }
 
     public function show($id)
     {
-        return Assurance::with(['voiture','fournisseur'])->findOrFail($id);
+        return Assurance::with(['voiture', 'fournisseur'])->findOrFail($id);
     }
 
     public function update(Request $request, $id)
     {
         $assurance = Assurance::findOrFail($id);
         $assurance->update($request->all());
+
         return response()->json($assurance);
     }
 
@@ -45,6 +47,7 @@ class AssuranceController extends Controller
     {
         $assurance = Assurance::findOrFail($id);
         $assurance->delete();
+
         return response()->json(['message' => 'Assurance supprimée']);
     }
 }

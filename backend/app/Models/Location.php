@@ -4,8 +4,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Voiture;
-use App\Models\Client;
 
 class Location extends Model
 {
@@ -17,7 +15,7 @@ class Location extends Model
         'date_location',
         'date_fin',
         'prix_location',
-        'etat'
+        'etat',
     ];
 
     protected $casts = [
@@ -43,9 +41,9 @@ class Location extends Model
     public function getClientNomAttribute()
     {
         if ($this->clientRelation) {
-            return $this->clientRelation->nom . ' ' . $this->clientRelation->prenom;
+            return $this->clientRelation->nom.' '.$this->clientRelation->prenom;
         }
-        
+
         // Fallback si pas de relation client (ancien système)
         return $this->client;
     }

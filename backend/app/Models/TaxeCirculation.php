@@ -19,11 +19,11 @@ class TaxeCirculation extends Model
         'status',
         'date_expiration',
         'rappel_jours',
-        'note'
+        'note',
     ];
 
-    public function voiture() {
+    public function voiture()
+    {
         return $this->belongsTo(Voiture::class);
     }
 }
-

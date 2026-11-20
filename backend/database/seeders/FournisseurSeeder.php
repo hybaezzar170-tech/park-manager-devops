@@ -2,8 +2,8 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Seeder;
 use App\Models\Fournisseur;
+use Illuminate\Database\Seeder;
 
 class FournisseurSeeder extends Seeder
 {
@@ -21,7 +21,7 @@ class FournisseurSeeder extends Seeder
                 'email' => 'contact@assurance-maroc.ma',
                 'site_web' => 'https://www.assurance-maroc.ma',
                 'contact' => 'Service Commercial',
-                'type' => 'Assurance'
+                'type' => 'Assurance',
             ],
             [
                 'nom' => 'Wafa',
@@ -34,7 +34,7 @@ class FournisseurSeeder extends Seeder
                 'email' => 'info@wafa-assurance.ma',
                 'site_web' => 'https://www.wafa-assurance.ma',
                 'contact' => 'Direction Client',
-                'type' => 'Assurance'
+                'type' => 'Assurance',
             ],
             [
                 'nom' => 'Auto Pièce',
@@ -47,7 +47,7 @@ class FournisseurSeeder extends Seeder
                 'email' => 'vente@auto-piece-plus.ma',
                 'site_web' => 'https://www.auto-piece-plus.ma',
                 'contact' => 'Magasin',
-                'type' => 'Vente pièce auto'
+                'type' => 'Vente pièce auto',
             ],
             [
                 'nom' => 'Centre Visite',
@@ -60,7 +60,7 @@ class FournisseurSeeder extends Seeder
                 'email' => 'rdv@centre-visite.ma',
                 'site_web' => 'https://www.centre-visite.ma',
                 'contact' => 'Réception',
-                'type' => 'Visite technique'
+                'type' => 'Visite technique',
             ],
             [
                 'nom' => 'Garage Auto',
@@ -73,7 +73,7 @@ class FournisseurSeeder extends Seeder
                 'email' => 'service@garage-autopro.ma',
                 'site_web' => 'https://www.garage-autopro.ma',
                 'contact' => 'Atelier',
-                'type' => 'Réparation'
+                'type' => 'Réparation',
             ],
             [
                 'nom' => 'Mamda',
@@ -86,8 +86,8 @@ class FournisseurSeeder extends Seeder
                 'email' => 'info@mamda.ma',
                 'site_web' => 'https://www.mamda.ma',
                 'contact' => 'Service Client',
-                'type' => 'Assurance'
-            ]
+                'type' => 'Assurance',
+            ],
         ];
 
         foreach ($fournisseurs as $fournisseur) {

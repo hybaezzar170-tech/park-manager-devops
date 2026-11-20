@@ -13,11 +13,11 @@ return new class extends Migration
     {
         Schema::create('acc_', function (Blueprint $table) {
             $table->id();
-             $table->foreignId('fournisseur_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('fournisseur_id')->constrained()->cascadeOnDelete();
             $table->foreignId('voiture_id')->constrained()->cascadeOnDelete();
             $table->string('reference')->unique();
             $table->string('nom');
-            $table->string('categorie'); 
+            $table->string('categorie');
             $table->string('marque')->nullable();
             $table->integer('quantite')->default(0);
             $table->integer('seuil_alerte')->default(5);

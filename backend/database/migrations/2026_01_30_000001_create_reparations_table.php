@@ -15,11 +15,11 @@ return new class extends Migration
             $table->date('date_debut');
             $table->date('date_fin')->nullable();
             $table->enum('statut', ['en_attente', 'en_cours', 'terminee'])->default('en_attente');
-            
+
             // Relations
             $table->foreignId('voiture_id')->nullable()->constrained('voitures')->onDelete('set null');
             $table->foreignId('mecanicien_id')->nullable()->constrained('ouvriers')->onDelete('set null');
-            
+
             $table->timestamps();
         });
     }

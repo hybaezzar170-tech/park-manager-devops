@@ -10,7 +10,7 @@ return new class extends Migration
     {
         // Drop the old table if it exists
         Schema::dropIfExists('locations');
-        
+
         // Create the correct locations table
         Schema::create('locations', function (Blueprint $table) {
             $table->id();

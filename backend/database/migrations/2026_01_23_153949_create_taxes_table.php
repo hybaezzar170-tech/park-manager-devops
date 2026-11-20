@@ -14,7 +14,7 @@ return new class extends Migration
             $table->year('annee');
             $table->decimal('montant', 10, 2);
             $table->date('date_paiement')->nullable();
-            $table->enum('status', ['payé','non payé'])->default('non payé');
+            $table->enum('status', ['payé', 'non payé'])->default('non payé');
             $table->timestamps();
         });
     }

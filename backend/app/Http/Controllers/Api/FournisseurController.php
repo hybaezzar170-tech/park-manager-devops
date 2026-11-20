@@ -18,6 +18,7 @@ class FournisseurController extends Controller
     public function piecesSuppliers()
     {
         $fournisseurs = Fournisseur::where('type', 'Vente pièce auto')->get();
+
         return response()->json($fournisseurs, 200);
     }
 
@@ -39,6 +40,7 @@ class FournisseurController extends Controller
         ]);
 
         $fournisseur = Fournisseur::create($request->all());
+
         return response()->json($fournisseur, 201);
     }
 
@@ -46,15 +48,20 @@ class FournisseurController extends Controller
     public function show($id)
     {
         $fournisseur = Fournisseur::find($id);
-        if (!$fournisseur) return response()->json(['message'=>'Fournisseur non trouvé'],404);
-        return response()->json($fournisseur,200);
+        if (! $fournisseur) {
+            return response()->json(['message' => 'Fournisseur non trouvé'], 404);
+        }
+
+        return response()->json($fournisseur, 200);
     }
 
     // Modifier un fournisseur
     public function update(Request $request, $id)
     {
         $fournisseur = Fournisseur::find($id);
-        if (!$fournisseur) return response()->json(['message'=>'Fournisseur non trouvé'],404);
+        if (! $fournisseur) {
+            return response()->json(['message' => 'Fournisseur non trouvé'], 404);
+        }
 
         $request->validate([
             'nom' => 'sometimes|required|string|max:255',
@@ -71,16 +78,20 @@ class FournisseurController extends Controller
         ]);
 
         $fournisseur->update($request->all());
-        return response()->json($fournisseur,200);
+
+        return response()->json($fournisseur, 200);
     }
 
     // Supprimer un fournisseur
     public function destroy($id)
     {
         $fournisseur = Fournisseur::find($id);
-        if (!$fournisseur) return response()->json(['message'=>'Fournisseur non trouvé'],404);
+        if (! $fournisseur) {
+            return response()->json(['message' => 'Fournisseur non trouvé'], 404);
+        }
 
         $fournisseur->delete();
-        return response()->json(['message'=>'Fournisseur supprimé'],200);
+
+        return response()->json(['message' => 'Fournisseur supprimé'], 200);
     }
 }
