@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -20,7 +20,6 @@ return new class extends Migration
             $table->unsignedBigInteger('fournisseur_id')->nullable();
             $table->string('type_piece')->nullable();
             $table->timestamps();
-
 
         });
     }
