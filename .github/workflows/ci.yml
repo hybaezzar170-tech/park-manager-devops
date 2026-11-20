@@ -24,6 +24,8 @@ jobs:
 
       - name: Installer les dépendances
         run: composer install --no-interaction --prefer-dist --no-progress
+      - name: Analyser le code (ESLint)
+        run: npx eslint src --ext .js,.jsx
 
       - name: Contrôler le style du code (Pint)
         run: php vendor/bin/pint --test
