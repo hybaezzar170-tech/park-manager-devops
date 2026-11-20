@@ -58,3 +58,52 @@ jobs:
         run: npm run build
         env:
           CI: false
+  package:
+    name: Package artefacts
+    runs-on: ubuntu-latest
+    needs: [backend, frontend]
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Calculer l'identifiant de version
+        id: meta
+        run: echo "sha=${GITHUB_SHA::7}" >> "$GITHUB_OUTPUT"
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+
+      - name: Construire le frontend
+        working-directory: frontend
+        run: |
+          npm ci
+          npm run build
+        env:
+          CI: false
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: frontend-build-${{ steps.meta.outputs.sha }}
+          path: frontend/build
+          retention-days: 14
+
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.1'
+          extensions: mbstring, pdo_mysql, xml, ctype, json, tokenizer
+          coverage: none
+
+      - name: Préparer le backend pour la production
+        working-directory: backend
+        run: composer install --no-dev --no-interaction --prefer-dist --optimize-autoloader
+
+      - name: Archiver le backend
+        run: tar --exclude='backend/tests' --exclude='backend/.env' -czf backend-${{ steps.meta.outputs.sha }}.tar.gz backend
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: backend-package-${{ steps.meta.outputs.sha }}
+          path: backend-${{ steps.meta.outputs.sha }}.tar.gz
+          retention-days: 14
