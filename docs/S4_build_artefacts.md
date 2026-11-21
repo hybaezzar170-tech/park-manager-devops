@@ -58,3 +58,4 @@ Les artefacts sont conservés 14 jours.
 | `S4_04_contenu_backend.png` | Listing de l'archive backend et recherche vide de `.env` et `tests` |
 | `S4_05_detail_job_package.png` | Détail des étapes du job `package` et durées |
 | `S4_06_verification_empreinte.png` | Empreinte SHA-256 calculée, identique à celle de GitHub |
+| `S4_07_artefacts_sur_develop.png` | Artefacts publiés sur la branche develop |
