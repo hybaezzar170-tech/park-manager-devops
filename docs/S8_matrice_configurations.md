@@ -47,5 +47,6 @@ Registre : GitHub Container Registry (GHCR)
 - [x] Protection du fichier local par `.gitignore`.
 - [x] Workflow GHCR ajouté.
 - [x] Matrice des configurations documentée.
-- [ ] Publication effective des images GHCR.
-- [ ] Captures d'écran des images publiées.
+- [x] Publication effective des images GHCR.
+- [x] Captures d'écran des images publiées.
+
