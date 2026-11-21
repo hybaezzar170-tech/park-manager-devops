@@ -1,7 +1,7 @@
 ﻿# SEMAINE 7 — CONTENEURISATION DE L'APPLICATION
 
-**Projet :** Park Manager
-**Module :** DevOps
+**Projet :** Park Manager  
+**Module :** DevOps  
 **Environnement :** Docker, Docker Compose, Laravel, React et MySQL
 
 ---
@@ -54,14 +54,38 @@ Les réalisations ont été intégrées dans `develop` :
 
 ![Pull Request Dockerfiles](Captures/S7_04_pr_dockerfiles.png)
 
-## 6. Vérifications et limites
+### 5.4 Vérification de l'API backend
 
-La configuration du fichier `docker-compose.yml` a été vérifiée avec `docker compose config`.
+![Test API backend](Captures/S7_05_api_backend.png)
 
-Les conteneurs actuellement actifs ont été identifiés comme provenant de `docker-compose.test.yml`, utilisé pour la validation de la semaine 9. Leur fonctionnement ne constitue donc pas une preuve de démarrage de la stack définie dans le fichier principal de la semaine 7.
+### 5.5 Conteneurs Docker actifs
 
-Le démarrage indépendant de cette stack reste à vérifier.
+![Conteneurs Docker actifs](Captures/S7_06_conteneurs_actif.png)
+
+## 6. Vérifications et tests
+
+La configuration du fichier `docker-compose.yml` a été vérifiée avec la commande :
+
+`docker compose config --quiet`
+
+Une configuration temporaire isolée a ensuite permis de tester les Dockerfiles et les services sans conserver les mêmes ports que l'environnement S9.
+
+Les vérifications effectuées sont les suivantes :
+
+- Construction des images Docker backend et frontend réussie.
+- Démarrage des trois conteneurs : MySQL, backend et frontend.
+- MySQL déclaré `healthy`.
+- Frontend accessible sur `http://localhost:3003`.
+- Connexion du backend à MySQL avec `DB_HOST=db`.
+- Exécution réussie des migrations Laravel avec `php artisan migrate --force`.
+- Test de l'API `GET /api/voitures` : réponse HTTP 200 OK.
+
+La stack S9 a ensuite été redémarrée et son API a également répondu HTTP 200 OK sur `http://localhost:8000/api/voitures`.
+
+**Remarque :** les tests de démarrage ont été réalisés avec une configuration temporaire utilisant les Dockerfiles du projet. Le démarrage du fichier Compose principal sur ses ports propres n'a pas été validé directement.
 
 ## 7. Conclusion
 
-La structure de conteneurisation de l'application est mise en place et les modifications sont intégrées dans la branche `develop`. La validation complète du démarrage de la stack principale reste une étape à effectuer.
+La conteneurisation de l'application est mise en place. Les images backend et frontend ont été construites avec succès, les conteneurs ont démarré, la connexion à MySQL a été vérifiée et les migrations Laravel ont été exécutées. Le fonctionnement de l'API a été confirmé par une réponse HTTP 200 OK.
+
+Les modifications sont intégrées dans la branche `develop`. La semaine 7 dispose désormais de preuves de construction et de fonctionnement des composants Docker.
