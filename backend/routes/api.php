@@ -29,6 +29,24 @@ use Illuminate\Support\Facades\Route;
 |--------------------------------------------------------------------------
 */
 
+// Health Check
+Route::get('/health', function () {
+    try {
+        \Illuminate\Support\Facades\DB::select('SELECT 1');
+
+        return response()->json([
+            'status' => 'ok',
+            'service' => 'backend',
+            'database' => 'connected'
+        ], 200);
+    } catch (\Throwable $e) {
+        return response()->json([
+            'status' => 'error',
+            'service' => 'backend',
+            'database' => 'disconnected'
+        ], 503);
+    }
+});
 // Login
 Route::post('login', [UserController::class, 'login']);
 
@@ -41,7 +59,7 @@ Route::middleware('auth:sanctum')->group(function () {
     });
 
     // Resources
-    // Route::apiResource('users', UserController::class); // Déplacé vers les routes publiques
+    // Route::apiResource('users', UserController::class); // DÃ©placÃ© vers les routes publiques
 });
 
 // Public routes (no authentication required)
