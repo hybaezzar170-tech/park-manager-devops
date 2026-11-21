@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+  <testsuite name="C:\projets\park-manager-devops\backend\phpunit.xml" tests="8" assertions="3" errors="5" failures="0" skipped="0" time="0.418080">
+    <testsuite name="Unit" tests="7" assertions="2" errors="5" failures="0" skipped="0" time="0.311400">
+      <testsuite name="Tests\Unit\AlerteTest" file="C:\projets\park-manager-devops\backend\tests\Unit\AlerteTest.php" tests="2" assertions="0" errors="2" failures="0" skipped="0" time="0.200398">
+        <testcase name="test_echeance_du_lendemain_affiche_un_jour_restant" file="C:\projets\park-manager-devops\backend\tests\Unit\AlerteTest.php" line="32" class="Tests\Unit\AlerteTest" classname="Tests.Unit.AlerteTest" assertions="0" time="0.176180">
+          <error type="Illuminate\Database\QueryException">Tests\Unit\AlerteTest::test_echeance_du_lendemain_affiche_un_jour_restant&#13;
+Illuminate\Database\QueryException: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'alba_ci_check.departements' doesn't exist (Connection: mysql, SQL: insert into `departements` (`nom`, `created_at`, `updated_at`) values (TEST Departement, 2026-11-13 21:22:00, 2026-11-13 21:22:00))
+&#13;
+C:\projets\park-manager-devops\backend\vendor\laravel\framework\src\Illuminate\Database\Connection.php:829
+C:\projets\park-manager-devops\backend\vendor\laravel\framework\src\Illuminate\Database\Connection.php:783
+C:\projets\park-manager-devops\backend\vendor\laravel\framework\src\Illuminate\Database\MySqlConnection.php:50
+C:\projets\park-manager-devops\backend\vendor\laravel\framework\src\Illuminate\Database\Query\Processors\MySqlProcessor.php:35
+C:\projets\park-manager-devops\backend\vendor\laravel\framework\src\Illuminate\Database\Query\Builder.php:3549
+C:\projets\park-manager-devops\backend\tests\Unit\AlerteTest.php:84
+C:\projets\park-manager-devops\backend\tests\Unit\AlerteTest.php:36</error>
+        </testcase>
+        <testcase name="test_vehicule_vendu_ne_genere_pas_d_alerte" file="C:\projets\park-manager-devops\backend\tests\Unit\AlerteTest.php" line="47" class="Tests\Unit\AlerteTest" classname="Tests.Unit.AlerteTest" assertions="0" time="0.024218">
+          <error type="Illuminate\Database\QueryException">Tests\Unit\AlerteTest::test_vehicule_vendu_ne_genere_pas_d_alerte&#13;
+Illuminate\Database\QueryException: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'alba_ci_check.departements' doesn't exist (Connection: mysql, SQL: insert into `departements` (`nom`, `created_at`, `updated_at`) values (TEST Departement, 2026-11-13 21:22:00, 2026-11-13 21:22:00))
+&#13;
+C:\projets\park-manager-devops\backend\vendor\laravel\framework\src\Illuminate\Database\Connection.php:829
+C:\projets\park-manager-devops\backend\vendor\laravel\framework\src\Illuminate\Database\Connection.php:783
+C:\projets\park-manager-devops\backend\vendor\laravel\framework\src\Illuminate\Database\MySqlConnection.php:50
+C:\projets\park-manager-devops\backend\vendor\laravel\framework\src\Illuminate\Database\Query\Processors\MySqlProcessor.php:35
+C:\projets\park-manager-devops\backend\vendor\laravel\framework\src\Illuminate\Database\Query\Builder.php:3549
+C:\projets\park-manager-devops\backend\tests\Unit\AlerteTest.php:84
+C:\projets\park-manager-devops\backend\tests\Unit\AlerteTest.php:51</error>
+        </testcase>
+      </testsuite>
+      <testsuite name="Tests\Unit\ExampleTest" file="C:\projets\park-manager-devops\backend\tests\Unit\ExampleTest.php" tests="1" assertions="1" errors="0" failures="0" skipped="0" time="0.001825">
+        <testcase name="test_that_true_is_true" file="C:\projets\park-manager-devops\backend\tests\Unit\ExampleTest.php" line="12" class="Tests\Unit\ExampleTest" classname="Tests.Unit.ExampleTest" assertions="1" time="0.001825"/>
+      </testsuite>
+      <testsuite name="Tests\Unit\ReparationDatesTest" file="C:\projets\park-manager-devops\backend\tests\Unit\ReparationDatesTest.php" tests="1" assertions="1" errors="0" failures="0" skipped="0" time="0.026801">
+        <testcase name="test_reparation_avec_date_fin_avant_date_debut_est_refusee" file="C:\projets\park-manager-devops\backend\tests\Unit\ReparationDatesTest.php" line="16" class="Tests\Unit\ReparationDatesTest" classname="Tests.Unit.ReparationDatesTest" assertions="1" time="0.026801"/>
+      </testsuite>
+      <testsuite name="Tests\Unit\VenteEtatTest" file="C:\projets\park-manager-devops\backend\tests\Unit\VenteEtatTest.php" tests="2" assertions="0" errors="2" failures="0" skipped="0" time="0.057093">
+        <testcase name="test_vente_sur_voiture_en_location_est_refusee" file="C:\projets\park-manager-devops\backend\tests\Unit\VenteEtatTest.php" line="23" class="Tests\Unit\VenteEtatTest" classname="Tests.Unit.VenteEtatTest" assertions="0" time="0.041462">
+          <error type="Illuminate\Database\QueryException">Tests\Unit\VenteEtatTest::test_vente_sur_voiture_en_location_est_refusee&#13;
+Illuminate\Database\QueryException: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'alba_ci_check.departements' doesn't exist (Connection: mysql, SQL: insert into `departements` (`nom`, `created_at`, `updated_at`) values (TEST Departement, 2026-11-20 16:24:39, 2026-11-20 16:24:39))
+&#13;
+C:\projets\park-manager-devops\backend\vendor\laravel\framework\src\Illuminate\Database\Connection.php:829
+C:\projets\park-manager-devops\backend\vendor\laravel\framework\src\Illuminate\Database\Connection.php:783
+C:\projets\park-manager-devops\backend\vendor\laravel\framework\src\Illuminate\Database\MySqlConnection.php:50
+C:\projets\park-manager-devops\backend\vendor\laravel\framework\src\Illuminate\Database\Query\Processors\MySqlProcessor.php:35
+C:\projets\park-manager-devops\backend\vendor\laravel\framework\src\Illuminate\Database\Query\Builder.php:3549
+C:\projets\park-manager-devops\backend\tests\Unit\VenteEtatTest.php:55
+C:\projets\park-manager-devops\backend\tests\Unit\VenteEtatTest.php:26</error>
+        </testcase>
+        <testcase name="test_vente_sur_voiture_deja_vendue_est_refusee" file="C:\projets\park-manager-devops\backend\tests\Unit\VenteEtatTest.php" line="36" class="Tests\Unit\VenteEtatTest" classname="Tests.Unit.VenteEtatTest" assertions="0" time="0.015631">
+          <error type="Illuminate\Database\QueryException">Tests\Unit\VenteEtatTest::test_vente_sur_voiture_deja_vendue_est_refusee&#13;
+Illuminate\Database\QueryException: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'alba_ci_check.departements' doesn't exist (Connection: mysql, SQL: insert into `departements` (`nom`, `created_at`, `updated_at`) values (TEST Departement, 2026-11-20 16:24:39, 2026-11-20 16:24:39))
+&#13;
+C:\projets\park-manager-devops\backend\vendor\laravel\framework\src\Illuminate\Database\Connection.php:829
+C:\projets\park-manager-devops\backend\vendor\laravel\framework\src\Illuminate\Database\Connection.php:783
+C:\projets\park-manager-devops\backend\vendor\laravel\framework\src\Illuminate\Database\MySqlConnection.php:50
+C:\projets\park-manager-devops\backend\vendor\laravel\framework\src\Illuminate\Database\Query\Processors\MySqlProcessor.php:35
+C:\projets\park-manager-devops\backend\vendor\laravel\framework\src\Illuminate\Database\Query\Builder.php:3549
+C:\projets\park-manager-devops\backend\tests\Unit\VenteEtatTest.php:55
+C:\projets\park-manager-devops\backend\tests\Unit\VenteEtatTest.php:39</error>
+        </testcase>
+      </testsuite>
+      <testsuite name="Tests\Unit\VentePrixTest" file="C:\projets\park-manager-devops\backend\tests\Unit\VentePrixTest.php" tests="1" assertions="0" errors="1" failures="0" skipped="0" time="0.025284">
+        <testcase name="test_vente_avec_prix_negatif_est_refusee" file="C:\projets\park-manager-devops\backend\tests\Unit\VentePrixTest.php" line="24" class="Tests\Unit\VentePrixTest" classname="Tests.Unit.VentePrixTest" assertions="0" time="0.025284">
+          <error type="Illuminate\Database\QueryException">Tests\Unit\VentePrixTest::test_vente_avec_prix_negatif_est_refusee&#13;
+Illuminate\Database\QueryException: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'alba_ci_check.departements' doesn't exist (Connection: mysql, SQL: insert into `departements` (`nom`, `created_at`, `updated_at`) values (TEST Departement, 2026-11-20 16:24:39, 2026-11-20 16:24:39))
+&#13;
+C:\projets\park-manager-devops\backend\vendor\laravel\framework\src\Illuminate\Database\Connection.php:829
+C:\projets\park-manager-devops\backend\vendor\laravel\framework\src\Illuminate\Database\Connection.php:783
+C:\projets\park-manager-devops\backend\vendor\laravel\framework\src\Illuminate\Database\MySqlConnection.php:50
+C:\projets\park-manager-devops\backend\vendor\laravel\framework\src\Illuminate\Database\Query\Processors\MySqlProcessor.php:35
+C:\projets\park-manager-devops\backend\vendor\laravel\framework\src\Illuminate\Database\Query\Builder.php:3549
+C:\projets\park-manager-devops\backend\tests\Unit\VentePrixTest.php:30</error>
+        </testcase>
+      </testsuite>
+    </testsuite>
+    <testsuite name="Feature" tests="1" assertions="1" errors="0" failures="0" skipped="0" time="0.106680">
+      <testsuite name="Tests\Feature\ExampleTest" file="C:\projets\park-manager-devops\backend\tests\Feature\ExampleTest.php" tests="1" assertions="1" errors="0" failures="0" skipped="0" time="0.106680">
+        <testcase name="test_the_application_returns_a_successful_response" file="C:\projets\park-manager-devops\backend\tests\Feature\ExampleTest.php" line="13" class="Tests\Feature\ExampleTest" classname="Tests.Feature.ExampleTest" assertions="1" time="0.106680"/>
+      </testsuite>
+    </testsuite>
+  </testsuite>
+</testsuites>

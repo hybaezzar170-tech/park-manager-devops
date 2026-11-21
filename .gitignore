@@ -49,3 +49,5 @@ setup_complete.php
 /backend/vendor/
 /frontend/node_modules/
 /frontend/build/
+
+!.env.docker.example
