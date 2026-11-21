@@ -62,9 +62,9 @@ Pendant la mise en place, plusieurs problèmes ont été identifiés et corrigé
 
 Les corrections ont été intégrées dans la branche de développement à travers la Pull Request **#9**.
 
-**Preuve – Exécution PHPUnit :**
+**Éléments de vérification – Exécution PHPUnit :**
 
-[![Résultat PHPUnit](Captures/S6_03_phpunit_resultat.png)](Captures/S6_03_phpunit_resultat.png)
+La capture dédiée à cette exécution n'a pas été conservée. Le rapport JUnit publié comme artefact `phpunit-report` et le statut des checks CI constituent les éléments de vérification disponibles.
 
 ## 5. Publication du rapport de tests
 
@@ -106,17 +106,3 @@ Les objectifs principaux de cette étape ont été réalisés :
 Cette étape a permis d'automatiser davantage la validation du projet Park Manager. Le pipeline ne se limite plus à vérifier l'installation et la compilation : il exécute également les migrations et les tests backend dans un environnement MySQL isolé.
 
 La réussite des trois jobs GitHub Actions après les corrections confirme le bon fonctionnement du workflow de validation intégré dans la branche `develop`.
-
----
-
-## Captures à ajouter
-
-Les liens ci-dessus utilisent les noms de fichiers suivants. Enregistre les captures correspondantes dans `docs/Captures` avec exactement ces noms (format PNG) :
-
-1. `S6_01_workflow_ci.png`
-2. `S6_02_mysql_migrations.png`
-3. `S6_03_phpunit_resultat.png`
-4. `S6_04_artifact_phpunit.png`
-5. `S6_05_all_checks_passed.png`
-
-Les images sont insérées sous forme de liens Markdown cliquables : cliquer sur une image permet d'ouvrir le fichier correspondant.
