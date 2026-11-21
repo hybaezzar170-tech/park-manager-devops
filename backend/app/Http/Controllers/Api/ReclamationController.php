@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Reclamation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\ValidationException;
 
 class ReclamationController extends Controller
 {
@@ -54,7 +55,7 @@ class ReclamationController extends Controller
                 'message' => 'Réclamation créée avec succès',
                 'reclamation' => $reclamation,
             ], 201);
-        } catch (\Illuminate\Validation\ValidationException $e) {
+        } catch (ValidationException $e) {
             return response()->json([
                 'error' => 'Validation failed',
                 'message' => $e->getMessage(),

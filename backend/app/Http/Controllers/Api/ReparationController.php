@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Piece;
 use App\Models\Reparation;
 use Illuminate\Http\Request;
 
@@ -40,7 +41,7 @@ class ReparationController extends Controller
                 $piecesData[$pieceId] = ['quantite_utilisee' => 1];
 
                 // Déduire la quantité de la pièce
-                $piece = \App\Models\Piece::find($pieceId);
+                $piece = Piece::find($pieceId);
                 if ($piece && $piece->quantite > 0) {
                     $piece->decrement('quantite', 1);
                 }
@@ -79,7 +80,7 @@ class ReparationController extends Controller
 
             // Remettre les quantités des anciennes pièces
             foreach ($oldPieces as $pieceId) {
-                $piece = \App\Models\Piece::find($pieceId);
+                $piece = Piece::find($pieceId);
                 if ($piece) {
                     $piece->increment('quantite', 1);
                 }
@@ -94,7 +95,7 @@ class ReparationController extends Controller
                 $piecesData[$pieceId] = ['quantite_utilisee' => 1];
 
                 // Déduire la quantité de la pièce
-                $piece = \App\Models\Piece::find($pieceId);
+                $piece = Piece::find($pieceId);
                 if ($piece && $piece->quantite > 0) {
                     $piece->decrement('quantite', 1);
                 }

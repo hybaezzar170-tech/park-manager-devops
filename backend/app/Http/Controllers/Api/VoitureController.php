@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Location;
 use App\Models\Voiture;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class VoitureController extends Controller
@@ -30,8 +32,8 @@ class VoitureController extends Controller
     // Helper method to return expired rentals
     private function returnExpiredRentals()
     {
-        $expiredLocations = \App\Models\Location::where('etat', 'en_cours')
-            ->where('date_fin', '<', \Carbon\Carbon::today())
+        $expiredLocations = Location::where('etat', 'en_cours')
+            ->where('date_fin', '<', Carbon::today())
             ->with('voiture')
             ->get();
 

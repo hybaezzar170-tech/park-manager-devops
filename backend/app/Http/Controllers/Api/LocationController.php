@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Location;
 use App\Models\Voiture;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class LocationController extends Controller
@@ -27,8 +28,8 @@ class LocationController extends Controller
             ]);
 
             // S'assurer que les dates sont valides
-            $dateLocation = \Carbon\Carbon::parse($validated['date_location']);
-            $dateFin = \Carbon\Carbon::parse($validated['date_fin']);
+            $dateLocation = Carbon::parse($validated['date_location']);
+            $dateFin = Carbon::parse($validated['date_fin']);
 
             if ($dateFin->lt($dateLocation)) {
                 return response()->json([
@@ -78,8 +79,8 @@ class LocationController extends Controller
             foreach ($validated['locations'] as $index => $locationData) {
                 try {
                     // Vérifier que les dates sont valides
-                    $dateLocation = \Carbon\Carbon::parse($locationData['date_location']);
-                    $dateFin = \Carbon\Carbon::parse($locationData['date_fin']);
+                    $dateLocation = Carbon::parse($locationData['date_location']);
+                    $dateFin = Carbon::parse($locationData['date_fin']);
 
                     if ($dateFin->lt($dateLocation)) {
                         $errors[] = 'Location '.($index + 1).': La date de fin doit être supérieure ou égale à la date de location';
