@@ -41,7 +41,7 @@ class UserController extends Controller
         }
 
         // Validation email unique
-        $existingUser = \App\Models\User::where('email', $validated['email'])->first();
+        $existingUser = User::where('email', $validated['email'])->first();
         if ($existingUser) {
             return response()->json(['success' => false, 'message' => 'Cet email existe déjà'], 422);
         }

@@ -51,3 +51,5 @@ setup_complete.php
 /frontend/build/
 
 !.env.docker.example
+
+/frontend/dist/

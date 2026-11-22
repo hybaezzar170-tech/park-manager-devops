@@ -21,6 +21,7 @@ use App\Http\Controllers\Api\VenteController;
 use App\Http\Controllers\Api\VisiteController;
 use App\Http\Controllers\Api\VoitureController;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -29,6 +30,24 @@ use Illuminate\Support\Facades\Route;
 |--------------------------------------------------------------------------
 */
 
+// Health Check
+Route::get('/health', function () {
+    try {
+        DB::select('SELECT 1');
+
+        return response()->json([
+            'status' => 'ok',
+            'service' => 'backend',
+            'database' => 'connected',
+        ], 200);
+    } catch (Throwable $e) {
+        return response()->json([
+            'status' => 'error',
+            'service' => 'backend',
+            'database' => 'disconnected',
+        ], 503);
+    }
+});
 // Login
 Route::post('login', [UserController::class, 'login']);
 
@@ -41,7 +60,7 @@ Route::middleware('auth:sanctum')->group(function () {
     });
 
     // Resources
-    // Route::apiResource('users', UserController::class); // Déplacé vers les routes publiques
+    // Route::apiResource('users', UserController::class); // DÃ©placÃ© vers les routes publiques
 });
 
 // Public routes (no authentication required)

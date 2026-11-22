@@ -7,9 +7,12 @@ use App\Models\Alerte;
 use App\Models\Conducteur;
 use App\Models\Departement;
 use App\Models\Fournisseur;
+use App\Models\Location;
 use App\Models\Maintenance;
 use App\Models\Ouvrier;
 use App\Models\Piece;
+use App\Models\Reparation;
+use App\Models\Vente;
 use App\Models\Voiture;
 
 class StatisticsController extends Controller
@@ -57,7 +60,7 @@ class StatisticsController extends Controller
             }
 
             try {
-                $reparationsCount = \App\Models\Reparation::count();
+                $reparationsCount = Reparation::count();
             } catch (\Exception $e) {
                 // Ignorer les erreurs
             }
@@ -93,13 +96,13 @@ class StatisticsController extends Controller
             }
 
             try {
-                $locationsCount = \App\Models\Location::count();
+                $locationsCount = Location::count();
             } catch (\Exception $e) {
                 // Ignorer les erreurs
             }
 
             try {
-                $ventesCount = \App\Models\Vente::count();
+                $ventesCount = Vente::count();
             } catch (\Exception $e) {
                 // Ignorer les erreurs
             }

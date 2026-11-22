@@ -58,8 +58,7 @@ function App() {
     if (user.role === 'ouvrier') {
       return (
         <div style={{
-          padding: "40px",
-          textAlign: "center",
+                    textAlign: "center",
           background: "#fff3cd",
           border: "2px solid #d32f2f",
           borderRadius: "8px",
@@ -68,11 +67,11 @@ function App() {
           fontFamily: "Arial, sans-serif"
         }}>
           <div style={{ color: "#721c24", fontSize: "18px", fontWeight: "bold", marginBottom: "15px" }}>
-            ⚠️ ACCÈS LIMITÉ
+            {"\u26A0\uFE0F ACC\u00C8S LIMIT\u00C9"}
           </div>
           <div style={{ color: "#721c24", fontSize: "14px", lineHeight: "1.5" }}>
-            En tant qu'ouvrier, vous n'avez pas accès à cette page.<br/>
-            Veuillez contacter votre administrateur pour toute demande d'accès.
+            En tant qu'ouvrier, vous n'avez pas acc\u00E8s \u00E0 cette page.<br/>
+            Veuillez contacter votre administrateur pour toute demande d'acc\u00E8s.
           </div>
         </div>
       );
@@ -99,8 +98,7 @@ function App() {
     if (user.role === 'ouvrier') {
       return (
         <div style={{
-          padding: "40px",
-          textAlign: "center",
+                    textAlign: "center",
           background: "#fff3cd",
           border: "2px solid #d32f2f",
           borderRadius: "8px",
@@ -109,11 +107,11 @@ function App() {
           fontFamily: "Arial, sans-serif"
         }}>
           <div style={{ color: "#721c24", fontSize: "18px", fontWeight: "bold", marginBottom: "15px" }}>
-            ⚠️ ACCÈS REFUSÉ
+            {"\u26A0\uFE0F ACC\u00C8S REFUS\u00C9"}
           </div>
           <div style={{ color: "#721c24", fontSize: "14px", lineHeight: "1.5" }}>
-            En tant qu'ouvrier, vous n'avez pas accès à cette page.<br/>
-            Veuillez contacter votre administrateur pour toute demande d'accès.
+            En tant qu'ouvrier, vous n'avez pas acc\u00E8s \u00E0 cette page.<br/>
+            Veuillez contacter votre administrateur pour toute demande d'acc\u00E8s.
           </div>
         </div>
       );
@@ -170,7 +168,7 @@ function App() {
           cursor: "pointer",
         }}
       >
-        Déconnexion
+        {"D\u00E9connexion"}
       </button>
 
       <div style={{ textAlign: "center", marginBottom: "40px" }}>
@@ -196,7 +194,7 @@ function App() {
             [
               { view: "dashboard", label: "Voitures" },
               { view: "admin", label: "Administration" },
-              { view: "parametrage", label: "Paramétrage" },
+              { view: "parametrage", label: "Param\u00E9trage" },
             ].map(({ view, label }) => (
               <div
                 key={view}
@@ -232,8 +230,8 @@ function App() {
           ) : (
             [
               { view: "dashboard", label: "Voitures" },
-              { view: "parametrage", label: "Paramétrage" },
-              { view: "reclamation", label: "Réclamation" },
+              { view: "parametrage", label: "Param\u00E9trage" },
+              { view: "reclamation", label: "R\u00E9clamation" },
             ].map(({ view, label }) => (
               <div
                 key={view}

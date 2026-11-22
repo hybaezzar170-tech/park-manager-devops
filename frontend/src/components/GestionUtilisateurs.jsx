@@ -251,7 +251,7 @@ function GestionUtilisateurs() {
                     color: u.role === "admin" ? "#991b1b" : "#374151",
                     border: `1px solid ${u.role === "admin" ? "#fecaca" : "#d1d5db"}`
                   }}>
-                    {(u.role || 'user') ? (u.role || 'user').toUpperCase() : 'USER'}
+                    {(u.role || 'user').toUpperCase()}
                   </span>
                 </td>
                 <td style={{ padding: "16px 12px" }}>
