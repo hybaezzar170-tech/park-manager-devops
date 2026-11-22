@@ -21,6 +21,7 @@ use App\Http\Controllers\Api\VenteController;
 use App\Http\Controllers\Api\VisiteController;
 use App\Http\Controllers\Api\VoitureController;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -32,18 +33,18 @@ use Illuminate\Support\Facades\Route;
 // Health Check
 Route::get('/health', function () {
     try {
-        \Illuminate\Support\Facades\DB::select('SELECT 1');
+        DB::select('SELECT 1');
 
         return response()->json([
             'status' => 'ok',
             'service' => 'backend',
-            'database' => 'connected'
+            'database' => 'connected',
         ], 200);
-    } catch (\Throwable $e) {
+    } catch (Throwable $e) {
         return response()->json([
             'status' => 'error',
             'service' => 'backend',
-            'database' => 'disconnected'
+            'database' => 'disconnected',
         ], 503);
     }
 });
